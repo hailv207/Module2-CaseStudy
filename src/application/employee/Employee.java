@@ -12,6 +12,11 @@ public class Employee implements Serializable {
     private String password;
     private boolean status;
 
+    public Employee(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
     public Employee(String code, String name, String adress, String idNumber, String accessType, String username, boolean status) {
         this.code = code;
         this.name = name;
