@@ -7,37 +7,17 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="1131.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.employee.EmployeeManagerController">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
    <center>
-      <TableView fx:id="employeeTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="table" prefHeight="620.0" prefWidth="1006.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="codeColumn" prefWidth="102.0" text="Employee code" />
-          <TableColumn fx:id="nameColumn" prefWidth="233.0" text="Full name" />
-            <TableColumn fx:id="idnumberColumn" prefWidth="134.0" text="ID number" />
-            <TableColumn fx:id="birthdayColumn" prefWidth="100.0" text="Birthday" />
-            <TableColumn fx:id="addressColumn" prefWidth="336.0" text="Adress" />
+          <TableColumn fx:id="codeColumn" prefWidth="71.0" text="Code" />
+          <TableColumn fx:id="nameColumn" prefWidth="195.0" text="Full name" />
+            <TableColumn fx:id="idNumberColumn" prefWidth="151.0" text="ID number" />
+            <TableColumn fx:id="birthdayColumn" prefWidth="104.0" text="Birthday" />
+            <TableColumn fx:id="addressColumn" prefWidth="303.0" text="Adress" />
             <TableColumn fx:id="accessTypeColumn" prefWidth="112.0" text="Access type" />
-            <TableColumn fx:id="statusColumn" minWidth="9.0" prefWidth="111.0" text="Status" />
+            <TableColumn fx:id="usernameColumn" prefWidth="118.0" text="Username" />
+            <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
         </columns>
       </TableView>
    </center>

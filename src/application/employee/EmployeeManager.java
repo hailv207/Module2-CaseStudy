@@ -1,10 +1,12 @@
 package application.employee;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.*;
 
 public abstract class EmployeeManager {
-    private static ArrayList<Employee> employees = new ArrayList<>();
-
+    private static ObservableList<Employee> employees = FXCollections.observableArrayList();
     public static boolean addNewEmployee(Employee employee) {
         if (isExistCode(employee.getCode())) {
             return false;
@@ -33,5 +35,8 @@ public abstract class EmployeeManager {
             }
         }
         return false;
+    }
+    public static ObservableList getEmployees(){
+        return employees;
     }
 }
