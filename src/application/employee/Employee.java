@@ -3,60 +3,55 @@ package application.employee;
 import java.io.Serializable;
 
 public class Employee implements Serializable {
-    private String employeeCode;
-    private String employeeName;
-    private String employeeAddress;
-    private String employeeIDNumber;
+    private String code;
+    private String name;
+    private String adress;
+    private String idNumber;
     private String accessType;
-    private String userName;
+    private String username;
     private String password;
     private boolean status;
 
-    public Employee(String employeeCode, String employeeName, String employeeAddress, String employeeIDNumber, String accessType, boolean status) {
-        this.employeeCode = employeeCode;
-        this.employeeName = employeeName;
-        this.employeeAddress = employeeAddress;
-        this.employeeIDNumber = employeeIDNumber;
+    public Employee(String code, String name, String adress, String idNumber, String accessType, String username, boolean status) {
+        this.code = code;
+        this.name = name;
+        this.adress = adress;
+        this.idNumber = idNumber;
         this.accessType = accessType;
+        this.username = username;
         this.status = status;
     }
 
-    public Employee(String userName, String password, String accessType) {
-        this.accessType = accessType;
-        this.userName = userName;
-        this.password = password;
+    public String getCode() {
+        return code;
     }
 
-    public String getEmployeeCode() {
-        return employeeCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public void setEmployeeCode(String employeeCode) {
-        this.employeeCode = employeeCode;
+    public String getName() {
+        return name;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public String getAdress() {
+        return adress;
     }
 
-    public String getEmployeeAddress() {
-        return employeeAddress;
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
-    public void setEmployeeAddress(String employeeAddress) {
-        this.employeeAddress = employeeAddress;
+    public String getIdNumber() {
+        return idNumber;
     }
 
-    public String getEmployeeIDNumber() {
-        return employeeIDNumber;
-    }
-
-    public void setEmployeeIDNumber(String employeeIDNumber) {
-        this.employeeIDNumber = employeeIDNumber;
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
     public String getAccessType() {
@@ -67,16 +62,12 @@ public class Employee implements Serializable {
         this.accessType = accessType;
     }
 
-    public boolean isStatus() {
-        return status;
+    public String getUsername() {
+        return username;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    private void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     private String getPassword() {
@@ -86,23 +77,26 @@ public class Employee implements Serializable {
     private void setPassword(String password) {
         this.password = password;
     }
-    public boolean changePassword(String userName, String password,String newPassword) {
-        if (getAuthority(userName, password)){
-            setPassword(newPassword);
-            return true;
-        }
-        return false;
+
+    public boolean getStatus() {
+        return status;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
     }
 
-    public boolean getAuthority(String username, String password) {
-        boolean authorized = false;
-        if (username.equals(getUserName()) && password.equals(getPassword())) {
-            authorized = true;
+    public boolean getAuthorized(String username, String password) {
+        if (getUsername().equals(username) && getPassword().equals(password)) {
+            return true;
         }
-        return authorized;
+        return false;
+    }
+    public boolean changePassword(String username, String password, String newPassword) {
+        if (getAuthorized(username, password)){
+            setPassword(newPassword);
+            return true;
+        }
+        return false;
     }
 }
