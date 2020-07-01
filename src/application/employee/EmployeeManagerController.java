@@ -77,13 +77,7 @@ public class EmployeeManagerController implements Initializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
-//        employeeList = FXCollections.observableArrayList(
-//                new Employee("hailv","Le Vu Hai","Ha Noi","197196259","Manager",true),
-//                new Employee("hylv","Nguyen Van A","Ha Noi","197188659","Staff",true)
-//        );
-=======
->>>>>>> parent of cdd81a8... update
+
         codeColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeCode"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
         idnumberColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeIDNumber"));

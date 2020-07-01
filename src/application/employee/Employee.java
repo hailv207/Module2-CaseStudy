@@ -21,6 +21,12 @@ public class Employee implements Serializable {
         this.status = status;
     }
 
+    public Employee(String userName, String password, String accessType) {
+        this.accessType = accessType;
+        this.userName = userName;
+        this.password = password;
+    }
+
     public String getEmployeeCode() {
         return employeeCode;
     }
