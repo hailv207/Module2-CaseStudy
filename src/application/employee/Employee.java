@@ -5,18 +5,18 @@ import java.io.Serializable;
 public class Employee implements Serializable {
     private String code;
     private String name;
-    private String adress;
+    private String address;
     private String idNumber;
     private String accessType;
     private String username;
     private String password;
     private boolean status;
 
-    public Employee(String code, String name, String adress, String idNumber, String accessType, String username, boolean status) {
+    public Employee(String code, String name, String address, String idNumber, String accessType, String username, boolean status) {
         this.password = "123";
         this.code = code;
         this.name = name;
-        this.adress = adress;
+        this.address = address;
         this.idNumber = idNumber;
         this.accessType = accessType;
         this.username = username;
@@ -45,11 +45,11 @@ public class Employee implements Serializable {
     }
 
     public String getAddress() {
-        return adress;
+        return address;
     }
 
     public void setAddress(String adress) {
-        this.adress = adress;
+        this.address = adress;
     }
 
     public String getIdNumber() {
