@@ -16,7 +16,7 @@ public class LoginTest extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        primaryStage.setTitle("Menu");
+        primaryStage.setTitle("login");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

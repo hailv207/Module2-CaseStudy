@@ -17,13 +17,13 @@ public class Employee implements Serializable {
         this.password = password;
     }
 
-    public Employee(String code, String name, String adress, String idNumber, String accessType, String username, boolean status) {
+    public Employee(String code, String name, String adress, String idNumber, String accessType, boolean status) {
         this.code = code;
         this.name = name;
         this.adress = adress;
         this.idNumber = idNumber;
         this.accessType = accessType;
-        this.username = username;
+//        this.username = username;
         this.status = status;
     }
 

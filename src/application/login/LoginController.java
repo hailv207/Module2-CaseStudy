@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+
 import java.io.IOException;
 
 
@@ -30,18 +32,25 @@ public class LoginController {
 
         System.out.println(employee.getAuthorized(user, pass));
 
-        if (employee.getAuthorized(user, pass)){
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../menu/menu.fxml"));
-            Parent menuParent = null;
-            try {
-                menuParent = loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            if (employee.getAuthorized(user, pass)){
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("../menu/menu.fxml"));
+                Parent menuParent = null;
+                try {
+                    menuParent = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-            Scene scene = new Scene(menuParent);
-            LoginTest.stage.setScene(scene);
+                Scene scene = new Scene(menuParent);
+                LoginTest.stage.setScene(scene);
+            }
+        } catch (Exception e){
+            System.out.println("wrong username or password");
         }
     }
+//    public void keydownEnter(KeyEvent event){
+//        if (event.KEY_PRESSED ==)
+//    }
 }
