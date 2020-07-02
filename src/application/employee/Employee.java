@@ -23,6 +23,11 @@ public class Employee implements Serializable {
         this.status = status;
     }
 
+    public Employee(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getCode() {
         return code;
     }
