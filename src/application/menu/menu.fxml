@@ -7,21 +7,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.menu.MenuTest">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.menu.MenuController">
    <center>
       <SplitPane dividerPositions="0.558047493403694" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView prefHeight="491.0" prefWidth="589.0">
+                  <TableView fx:id="menuView" prefHeight="491.0" prefWidth="589.0">
                     <columns>
-                      <TableColumn fx:id="menuname" prefWidth="333.0" text="FoodMenu" />
-                      <TableColumn fx:id="unit" prefWidth="88.0" text="Unit" />
-                        <TableColumn fx:id="price" prefWidth="167.0" text="Price" />
+                      <TableColumn fx:id="menuNameCol" prefWidth="333.0" text="FoodMenu" />
+                      <TableColumn fx:id="unitCol" prefWidth="88.0" text="Unit" />
+                        <TableColumn fx:id="priceCol" prefWidth="167.0" text="Price" />
                     </columns>
                   </TableView>
-                  <Button fx:id="save" layoutX="223.0" layoutY="499.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="144.0" text="Save">
+                  <Button fx:id="save" layoutX="81.0" layoutY="504.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="144.0" text="Save">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="326.0" layoutY="507.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="144.0" text="Cancel">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -57,10 +61,10 @@
       </SplitPane>
    </center>
    <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="46.0" />
-         </font>
-      </Text>
+      <AnchorPane prefHeight="44.0" prefWidth="1061.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="31.0" layoutY="10.0" mnemonicParsing="false" text="Button" />
+         </children>
+      </AnchorPane>
    </top>
 </BorderPane>

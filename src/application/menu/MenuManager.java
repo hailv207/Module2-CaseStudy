@@ -1,8 +1,11 @@
 package application.menu;
-import java.util.ArrayList;
+import application.App;
+import application.filemanager.FileManager;
+
+import java.util.List;
 
 public abstract class MenuManager {
-    private static ArrayList<MenuItem> menuList;
+    private static List<MenuItem> menuList;
 
     public static boolean addMenuItem(MenuItem menuItem) {
         if (isExistID(menuItem.getItemCode())){
@@ -31,5 +34,12 @@ public abstract class MenuManager {
             }
         }
         return check;
+    }
+    public static List<MenuItem> getMenuList(){
+        if (menuList == null){
+            FileManager fileManager = new FileManager();
+            menuList = fileManager.read(App.PATH_MENU);
+        }
+        return menuList;
     }
 }

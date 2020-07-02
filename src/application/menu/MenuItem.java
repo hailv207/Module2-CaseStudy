@@ -2,20 +2,22 @@ package application.menu;
 
 //import application.material.MaterialItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MenuItem extends MenuManager{
+public class MenuItem extends MenuManager implements Serializable {
+    private int ID;
     private String itemCode;
     private String itemName;
-    private int unit;
+    private String itemUnit;
     private long itemPrice;
     private boolean status;
     private ArrayList<MenuItem> materialList = new ArrayList<>();
 
-    public MenuItem(String itemCode, String itemName, int unit,long itemPrice,boolean status) {
+    public MenuItem(String itemCode, String itemName, String unit,long itemPrice,boolean status) {
         this.itemCode = itemCode;
         this.itemName = itemName;
-        this.unit = unit;
+        this.itemUnit = unit;
         this.itemPrice = itemPrice;
         this.status = status;
     }
@@ -40,6 +42,14 @@ public class MenuItem extends MenuManager{
         return itemPrice;
     }
 
+    public String getItemUnit() {
+        return itemUnit;
+    }
+
+    public void setItemUnit(String itemUnit) {
+        this.itemUnit = itemUnit;
+    }
+
     public void setItemPrice(long itemPrice) {
         this.itemPrice = itemPrice;
     }
@@ -52,7 +62,7 @@ public class MenuItem extends MenuManager{
         this.status = status;
     }
 
-    public boolean addMenuItem(String itemCode, String itemName, int unit,long itemPrice, boolean status){
+    public boolean addMenuItem(String itemCode, String itemName, String unit,long itemPrice, boolean status){
         boolean check = checkID(itemCode);
         if (!check){
             materialList.add(new MenuItem(itemCode, itemName, unit, itemPrice, status));
