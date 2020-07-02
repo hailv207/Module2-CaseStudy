@@ -12,18 +12,14 @@ public class Employee implements Serializable {
     private String password;
     private boolean status;
 
-    public Employee(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
-
-    public Employee(String code, String name, String adress, String idNumber, String accessType, boolean status) {
+    public Employee(String code, String name, String adress, String idNumber, String accessType, String username, boolean status) {
+        this.password = "123";
         this.code = code;
         this.name = name;
         this.adress = adress;
         this.idNumber = idNumber;
         this.accessType = accessType;
-//        this.username = username;
+        this.username = username;
         this.status = status;
     }
 
@@ -43,11 +39,11 @@ public class Employee implements Serializable {
         this.name = name;
     }
 
-    public String getAdress() {
+    public String getAddress() {
         return adress;
     }
 
-    public void setAdress(String adress) {
+    public void setAddress(String adress) {
         this.adress = adress;
     }
 
