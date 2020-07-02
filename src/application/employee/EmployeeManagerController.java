@@ -1,6 +1,8 @@
 package application.employee;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
 import java.io.*;
@@ -10,8 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class EmployeeManagerController implements Initializable {
     List<Employee> list = new ArrayList<Employee>();
@@ -83,5 +89,14 @@ public class EmployeeManagerController implements Initializable {
         } catch (Exception e) {
              e.printStackTrace();
         }
+    }
+    public void changeSceneEditEmployee(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("EmployeeEditScene.fxml"));
+        Parent employeeEditView = loader.load();
+        Scene scene = new Scene(employeeEditView);
+        stage.setTitle("Edit Employee");
+        stage.setScene(scene);
     }
 }

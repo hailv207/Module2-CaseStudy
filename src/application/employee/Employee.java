@@ -13,6 +13,7 @@ public class Employee implements Serializable {
     private boolean status;
 
     public Employee(String code, String name, String adress, String idNumber, String accessType, String username, boolean status) {
+        this.password = "123";
         this.code = code;
         this.name = name;
         this.adress = adress;
@@ -38,11 +39,11 @@ public class Employee implements Serializable {
         this.name = name;
     }
 
-    public String getAdress() {
+    public String getAddress() {
         return adress;
     }
 
-    public void setAdress(String adress) {
+    public void setAddress(String adress) {
         this.adress = adress;
     }
 
