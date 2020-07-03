@@ -6,8 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EmployeeEditScene">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.employee.EmployeeEditController">
    <children>
       <Label layoutX="26.0" layoutY="31.0" prefHeight="20.0" prefWidth="107.0" text="Employee code" />
       <Label layoutX="26.0" layoutY="69.0" prefHeight="20.0" prefWidth="107.0" text="Employee name" />
@@ -16,14 +15,14 @@
       <Label layoutX="26.0" layoutY="190.0" prefHeight="20.0" prefWidth="107.0" text="Employee birthday" />
       <Label layoutX="26.0" layoutY="233.0" prefHeight="20.0" prefWidth="107.0" text="Access type" />
       <Label layoutX="26.0" layoutY="270.0" prefHeight="20.0" prefWidth="107.0" text="Status" />
-      <TextField layoutX="153.0" layoutY="28.0" prefHeight="27.0" prefWidth="399.0" />
-      <TextField layoutX="153.0" layoutY="66.0" prefHeight="27.0" prefWidth="399.0" />
-      <TextField layoutX="153.0" layoutY="106.0" prefHeight="27.0" prefWidth="399.0" />
-      <TextField layoutX="153.0" layoutY="146.0" prefHeight="27.0" prefWidth="399.0" />
+      <TextField fx:id="codeText" disable="true" layoutX="153.0" layoutY="28.0" prefHeight="27.0" prefWidth="399.0" />
+      <TextField fx:id="nameText" layoutX="153.0" layoutY="66.0" prefHeight="27.0" prefWidth="399.0" />
+      <TextField fx:id="idNumberText" layoutX="153.0" layoutY="106.0" prefHeight="27.0" prefWidth="399.0" />
+      <TextField fx:id="addressText" layoutX="153.0" layoutY="146.0" prefHeight="27.0" prefWidth="399.0" />
       <DatePicker layoutX="153.0" layoutY="187.0" prefHeight="27.0" prefWidth="399.0" />
-      <ComboBox layoutX="153.0" layoutY="230.0" prefHeight="27.0" prefWidth="399.0" />
-      <ComboBox layoutX="153.0" layoutY="267.0" prefHeight="27.0" prefWidth="399.0" />
+      <ComboBox fx:id="accessTypeCombo" layoutX="153.0" layoutY="230.0" prefHeight="27.0" prefWidth="399.0" />
+      <ComboBox fx:id="statusCombo" layoutX="153.0" layoutY="267.0" prefHeight="27.0" prefWidth="399.0" />
       <Button layoutX="163.0" layoutY="339.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="107.0" text="Save" />
-      <Button layoutX="353.0" layoutY="339.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="107.0" text="Cancel" />
+      <Button layoutX="353.0" layoutY="339.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="107.0" text="Cancel" />
    </children>
 </AnchorPane>

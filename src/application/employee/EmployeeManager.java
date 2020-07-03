@@ -7,6 +7,7 @@ import java.util.*;
 
 public abstract class EmployeeManager {
     private static ObservableList<Employee> employees = FXCollections.observableArrayList();
+
     public static boolean addNewEmployee(Employee employee) {
         if (isExistCode(employee.getCode())) {
             return false;
@@ -15,6 +16,7 @@ public abstract class EmployeeManager {
             return true;
         }
     }
+
     public static Employee getEmployeeByCode(String code) {
         for (Employee employee : employees) {
             if (employee.getCode().equals(code)) {
@@ -24,7 +26,7 @@ public abstract class EmployeeManager {
         return null;
     }
 
-    public static boolean deleteEmployee(Employee employee){
+    public static boolean deleteEmployee(Employee employee) {
         return employees.remove(employee);
     }
 
@@ -36,7 +38,11 @@ public abstract class EmployeeManager {
         }
         return false;
     }
-    public static ObservableList getEmployees(){
+
+    public static ObservableList getEmployees() {
         return employees;
     }
+
+
+
 }

@@ -52,7 +52,6 @@ public class EmployeeManagerController implements Initializable {
         addressColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("address"));
         birthdayColumn.setCellValueFactory(new PropertyValueFactory<Employee, LocalDate>("birthday"));
         accessTypeColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("accessType"));
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("username"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<Employee, Boolean>("status"));
         table.setItems(EmployeeManager.getEmployees());
     }
@@ -91,12 +90,16 @@ public class EmployeeManagerController implements Initializable {
         }
     }
     public void changeSceneEditEmployee(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("EmployeeEditScene.fxml"));
         Parent employeeEditView = loader.load();
         Scene scene = new Scene(employeeEditView);
         stage.setTitle("Edit Employee");
+        stage.setScene(scene);
+        EmployeeEditController controller = loader.getController();
+        Employee employee = table.getSelectionModel().getSelectedItem();
+        controller.setEmployee(employee);
         stage.setScene(scene);
     }
 }

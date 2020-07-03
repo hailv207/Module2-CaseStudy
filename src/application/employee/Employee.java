@@ -1,30 +1,31 @@
 package application.employee;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Employee implements Serializable {
+    private final String DEFAULT_PASS = "123";
     private String code;
     private String name;
-    private String adress;
+    private String address;
     private String idNumber;
     private String accessType;
-    private String username;
     private String password;
     private boolean status;
+    private LocalDate birthday;
 
-    public Employee(String code, String name, String adress, String idNumber, String accessType, String username, boolean status) {
-        this.password = "123";
+    public Employee(String code, String name, String address, String idNumber, String accessType, String username, boolean status) {
+        this.password = DEFAULT_PASS;
         this.code = code;
         this.name = name;
-        this.adress = adress;
+        this.address = address;
         this.idNumber = idNumber;
         this.accessType = accessType;
-        this.username = username;
         this.status = status;
     }
 
-    public Employee(String username, String password) {
-        this.username = username;
+    public Employee(String code, String password) {
+        this.code = code;
         this.password = password;
     }
 
@@ -45,11 +46,11 @@ public class Employee implements Serializable {
     }
 
     public String getAddress() {
-        return adress;
+        return address;
     }
 
     public void setAddress(String adress) {
-        this.adress = adress;
+        this.address = adress;
     }
 
     public String getIdNumber() {
@@ -68,14 +69,6 @@ public class Employee implements Serializable {
         this.accessType = accessType;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     private String getPassword() {
         return password;
     }
@@ -92,15 +85,31 @@ public class Employee implements Serializable {
         this.status = status;
     }
 
-    public boolean getAuthorized(String username, String password) {
-        if (getUsername().equals(username) && getPassword().equals(password)) {
+    public boolean getAuthorized(String code, String password) {
+        if (getCode().equals(code) && getPassword().equals(password)) {
             return true;
         }
         return false;
     }
-    public boolean changePassword(String username, String password, String newPassword) {
-        if (getAuthorized(username, password)){
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public boolean changePassword(String code, String password, String newPassword) {
+        if (getAuthorized(code, password)) {
             setPassword(newPassword);
+            return true;
+        }
+        return false;
+    }
+    public boolean resetPassword(String managerCode, String managerPassword){
+        if (EmployeeManager.getEmployeeByCode(managerCode).getAuthorized(managerCode,managerPassword)){
+            setPassword(DEFAULT_PASS);
             return true;
         }
         return false;
