@@ -1,5 +1,7 @@
 package application.employee;
 
+import application.App;
+import application.filemanager.FileManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import static application.App.PATH_EMPLOYEE;
 
 public class EmployeeManagerController implements Initializable {
     List<Employee> list = new ArrayList<Employee>();
@@ -51,38 +55,6 @@ public class EmployeeManagerController implements Initializable {
         table.getItems().addAll(EmployeeManager.getEmployees());
     }
 
-//    public void writeEmployees() {
-//        String filePath = "src/application/employee/data/employees.dat";
-//        File file = new File(filePath);
-//        try {
-//            FileOutputStream fos = new FileOutputStream(file);
-//            ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.writeObject(new Employee("hailv", "Le Vu Hai", "Ha noi", "199199", "Manager", "hailv", true));
-//            oos.writeObject(new Employee("tung", "Nguyen Tuan Tung", "Ha noi", "122222", "Staff", "tung", true));
-//            oos.writeObject(new Employee("hailv", "Nguyen Tuan Toan", "Ha noi", "354646", "Staff", "toan", true));
-//            fos.close();
-//            oos.close();
-//        } catch (Exception e) {
-//        }
-//    }
-
-//    public void readEmployees() {
-//        writeEmployees();
-//        String filePath = "src/application/employee/data/employees.dat";
-//        File file = new File(filePath);
-//        try {
-//            FileInputStream fis = new FileInputStream(file);
-//            ObjectInputStream ois = new ObjectInputStream(fis);
-//            Object obj = null;
-//            while ((obj = ois.readObject()) != null) {
-//                EmployeeManager.addNewEmployee((Employee) obj);
-//            }
-//            fis.close();
-//            ois.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public void changeSceneEditEmployee(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
@@ -96,5 +68,45 @@ public class EmployeeManagerController implements Initializable {
         Employee employee = table.getSelectionModel().getSelectedItem();
         controller.setEmployee(employee);
         stage.setScene(scene);
+    }
+    public void changeSceneAddEmployee(ActionEvent event) throws IOException {
+        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("EmployeeAddScene.fxml"));
+        Parent employeeAddView = loader.load();
+        Scene scene = new Scene(employeeAddView);
+        stage.setTitle("Add new Employee");
+        stage.setScene(scene);
+        stage.setScene(scene);
+    }
+    public void deleteEmployee(){
+        Employee employee = table.getSelectionModel().getSelectedItem();
+        TextInputDialog passwordInputDialog = new TextInputDialog();
+        passwordInputDialog.setHeaderText("Enter your password.");
+        passwordInputDialog.showAndWait();
+        String inputResult = passwordInputDialog.getEditor().getText();
+        boolean authorized = EmployeeManager.getEmployeeByCode(App.currentUser).getAuthorized(App.currentUser, inputResult);
+        if (authorized) {
+            if (EmployeeManager.deleteEmployee(EmployeeManager.getEmployeeByCode(employee.getCode()))){
+                FileManager fileManager = new FileManager();
+                fileManager.write(PATH_EMPLOYEE,EmployeeManager.getEmployees());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("System information");
+                alert.setContentText("Delete employee successfully.");
+                alert.showAndWait();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("System information");
+                alert.setContentText("Delete employee unsuccessfully.");
+                alert.showAndWait();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("System information");
+            alert.setContentText("Your password is incorrect. Deleting was cancelled.");
+            alert.showAndWait();
+        }
+
+
     }
 }

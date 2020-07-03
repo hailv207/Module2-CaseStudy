@@ -14,11 +14,12 @@ public class Employee implements Serializable {
     private boolean status;
     private LocalDate birthday;
 
-    public Employee(String code, String name, String address, String idNumber, String accessType, String username, boolean status) {
+    public Employee(String code, String name, String address, String idNumber, LocalDate birthday, String accessType, boolean status) {
         this.password = DEFAULT_PASS;
         this.code = code;
         this.name = name;
         this.address = address;
+        this.birthday = birthday;
         this.idNumber = idNumber;
         this.accessType = accessType;
         this.status = status;

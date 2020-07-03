@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,10 +15,14 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.ResourceBundle;
 
 
-public class EmployeeEditController {
+public class EmployeeEditController implements Initializable {
     @FXML
     private TextField codeText;
 
@@ -46,7 +51,8 @@ public class EmployeeEditController {
         addressText.setText(employee.getAddress());
         idNumberText.setText(employee.getIdNumber());
         birthdayPicker.setValue(employee.getBirthday());
-
+        statusCheck.setSelected(employee.getStatus());
+        accessTypeCombo.getSelectionModel().select(employee.getAccessType());
     }
 
     public void cancel(ActionEvent event) throws IOException {
@@ -76,6 +82,10 @@ public class EmployeeEditController {
         employee.setBirthday(newBirthday);
         employee.setIdNumber(newIDNumber);
         fileManager.write("src/application/employee/data/employees.dat", EmployeeManager.getEmployees());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("System information");
+        alert.setContentText("Save employee successfully.");
+        alert.showAndWait();
     }
 
     public void resetPassword() {
@@ -87,4 +97,8 @@ public class EmployeeEditController {
         EmployeeManager.getEmployeeByCode(code).resetPassword(App.currentUser,inputResult);
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        accessTypeCombo.getItems().addAll("manager","staff");
+    }
 }
