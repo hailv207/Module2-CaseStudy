@@ -52,7 +52,6 @@ public class EmployeeManagerController implements Initializable {
         addressColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("address"));
         birthdayColumn.setCellValueFactory(new PropertyValueFactory<Employee, LocalDate>("birthday"));
         accessTypeColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("accessType"));
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("username"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<Employee, Boolean>("status"));
         table.setItems(EmployeeManager.getEmployees());
     }
