@@ -36,7 +36,6 @@ public class LoginController {
         for (Employee employee:list){
             EmployeeManager.addNewEmployee(employee);
         }
-
         Employee employee = EmployeeManager.getEmployeeByCode(user);
         System.out.println(employee);
         try{
@@ -47,7 +46,7 @@ public class LoginController {
                     if (accessType.equals("staff")){
                         loader.setLocation(App.getResource("menu/menu.fxml"));
                     } else if (accessType.equals("manager")){
-                        loader.setLocation(App.getResource("../employee/EmployeeManagerScene.fxml"));
+                        loader.setLocation(App.getResource("employee/EmployeeManagerScene.fxml"));
                     }
                     Parent menuParent = null;
                     try {
