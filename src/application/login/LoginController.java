@@ -33,9 +33,10 @@ public class LoginController {
         FileManager<Employee> employeeFileManager = new FileManager<>();
         Collections.copy(EmployeeManager.getEmployees(),employeeFileManager.read(App.PATH_EMPLOYEE));
         Employee employee = EmployeeManager.getEmployeeByCode(user);
-        if (employee.getAuthorized(user, pass)){
-            String accessType = employee.getAccessType();
-            try {
+        try{
+            if (employee.getAuthorized(user, pass)){
+                String accessType = employee.getAccessType();
+                try {
                     FXMLLoader loader = new FXMLLoader();
                     if (accessType.equals("staff")){
                         loader.setLocation(App.getResource("menu/menu.fxml"));
@@ -54,12 +55,20 @@ public class LoginController {
                     App.stage.setScene(scene);
                     App.currentUser = user;
 
-            } catch (Exception e){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("User has not wright to access system. Please contact your manager.");
-                alert.showAndWait();
+                } catch (Exception e){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("System information");
+                    alert.setContentText("User has not wright to access system. Please contact your manager.");
+                    alert.showAndWait();
+                }
             }
+        } catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("System information");
+            alert.setContentText("User does not exist. Please contact system admin.");
+            alert.showAndWait();
         }
+
 
     }
 
