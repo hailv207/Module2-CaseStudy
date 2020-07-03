@@ -59,7 +59,7 @@ public class EmployeeAddController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        accessTypeCombo.getItems().addAll("manger", "staff");
+        accessTypeCombo.getItems().addAll("manager", "staff");
         accessTypeCombo.getSelectionModel().select("staff");
         clear();
     }
