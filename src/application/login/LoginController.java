@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 
 public class LoginController {
@@ -31,8 +32,13 @@ public class LoginController {
 
 
         FileManager<Employee> employeeFileManager = new FileManager<>();
-        Collections.copy(EmployeeManager.getEmployees(),employeeFileManager.read(App.PATH_EMPLOYEE));
+        List<Employee> list = employeeFileManager.read(App.PATH_EMPLOYEE);
+        for (Employee employee:list){
+            EmployeeManager.addNewEmployee(employee);
+        }
+
         Employee employee = EmployeeManager.getEmployeeByCode(user);
+        System.out.println(employee);
         try{
             if (employee.getAuthorized(user, pass)){
                 String accessType = employee.getAccessType();
@@ -68,8 +74,6 @@ public class LoginController {
             alert.setContentText("User does not exist. Please contact system admin.");
             alert.showAndWait();
         }
-
-
     }
 
     @FXML
