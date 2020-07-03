@@ -12,6 +12,8 @@ public class App extends Application {
 
     public static final String PATH_MENU = "src/application/menu/data/menu.dat";
     public static final String PATH_ORDER = "src/application/order/data/data.dat";
+    public static String currentUser;
+
     public static Stage stage;
 
     public static URL getResource(String url){

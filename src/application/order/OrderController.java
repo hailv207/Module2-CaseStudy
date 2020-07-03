@@ -35,12 +35,12 @@ public class OrderController implements Initializable {
 
 
     public void onNewOrder(){
-        // new // add ordermanager// list.add
-        refresh();
-
-        // OrderManager orderManager = new OrderManager();
-
-        System.out.println("test");
+//         new // add ordermanager// list.add
+//        refresh();
+//
+//         OrderManager orderManager = new OrderManager();
+//
+//        System.out.println("test");
     }
 
     public void refresh(){

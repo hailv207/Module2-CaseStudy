@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -44,6 +43,7 @@ public class LoginController {
                 Scene scene = new Scene(menuParent);
                 App.stage.setTitle("Menu");
                 App.stage.setScene(scene);
+                App.currentUser = user;
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -53,8 +53,6 @@ public class LoginController {
     @FXML
     public void keydownPress(KeyEvent event){
         if (event.getCode()== KeyCode.ENTER){
-            System.out.println("ok");
-
             onClickLogin();
         }
     }
