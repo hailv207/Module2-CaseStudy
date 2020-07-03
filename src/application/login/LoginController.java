@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
+import java.util.Collections;
 
 
 public class LoginController {
@@ -30,13 +31,11 @@ public class LoginController {
 
 
         FileManager<Employee> employeeFileManager = new FileManager<>();
-        EmployeeManager.getEmployees() = employeeFileManager.read(App.PATH_EMPLOYEE);
+        Collections.copy(EmployeeManager.getEmployees(),employeeFileManager.read(App.PATH_EMPLOYEE));
         Employee employee = EmployeeManager.getEmployeeByCode(user);
         if (employee.getAuthorized(user, pass)){
             String accessType = employee.getAccessType();
             try {
-
-
                     FXMLLoader loader = new FXMLLoader();
                     if (accessType.equals("staff")){
                         loader.setLocation(App.getResource("menu/menu.fxml"));
