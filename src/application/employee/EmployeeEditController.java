@@ -84,10 +84,7 @@ public class EmployeeEditController {
         passwordInputDialog.setHeaderText("Enter your password.");
         passwordInputDialog.showAndWait();
         String inputResult = passwordInputDialog.getEditor().getText();
-        Employee employee = EmployeeManager.getEmployeeByCode(App.currentUser);
-        if (employee.getAuthorized(code,inputResult)){
-
-        }
+        EmployeeManager.getEmployeeByCode(code).resetPassword(App.currentUser,inputResult);
     }
 
 }
