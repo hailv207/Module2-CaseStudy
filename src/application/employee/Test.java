@@ -11,7 +11,6 @@ public class Test extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("EmployeeManagerScene.fxml"));
-
         primaryStage.setTitle("Employee Manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
