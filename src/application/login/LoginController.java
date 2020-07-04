@@ -4,6 +4,8 @@ import application.App;
 import application.employee.Employee;
 import application.employee.EmployeeManager;
 import application.filemanager.FileManager;
+import application.order.Order;
+import application.order.OrderManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,7 +46,12 @@ public class LoginController {
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     if (accessType.equals("staff")){
-                        loader.setLocation(App.getResource("menu/menu.fxml"));
+                        FileManager<Order> fileManager = new FileManager<>();
+
+                        for (Order o: fileManager.read(App.PATH_ORDER) ){
+                            OrderManager.add(o);
+                        }
+                        loader.setLocation(App.getResource("order/order.fxml"));
                     } else if (accessType.equals("manager")){
                         loader.setLocation(App.getResource("employee/EmployeeManagerScene.fxml"));
                     }
@@ -58,6 +65,7 @@ public class LoginController {
                     Scene scene = new Scene(menuParent);
                     App.stage.setTitle("Menu");
                     App.stage.setScene(scene);
+                    App.stage.centerOnScreen();
                     App.currentUser = user;
 
                 } catch (Exception e){

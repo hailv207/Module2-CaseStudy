@@ -1,18 +1,21 @@
 package application.order;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
     private List<OrderItem> orderItemList;
     private LocalDate orderDate;
     private boolean orderStatus;
     private String tableNumber;
+    private long orderTotal;
 
     public Order() {
         this.orderItemList = new ArrayList<OrderItem>();
         this.orderDate = LocalDate.now();
+        this.orderStatus = true;
     }
 
     public String getTableNumber() {
@@ -43,19 +46,44 @@ public class Order {
         return orderDate;
     }
 
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public long getOrderTotal() {
+        return orderTotal;
+    }
+
+    public void setOderTotal(long orderTotal) {
+        this.orderTotal = orderTotal;
+    }
 
     public void addOrderItem(OrderItem item) {
-        for (OrderItem i:orderItemList){
-            if (i.getOrderItemName().equals(item.getOrderItemName())){
-                item.increaseQuantity();
+        for (OrderItem i : orderItemList) {
+            if ((i.getOrderItem().getItemCode()).equals(item.getOrderItem().getItemCode())) {
+                i.increaseQuantity();
+                return;
             }
-            return;
         }
         orderItemList.add(item);
     }
 
-    public void deleteOrderItem(OrderItem item) {
-        orderItemList.remove(item);
+    public void calculateTotal() {
+        long total = 0;
+        for (OrderItem o : orderItemList) {
+            total += (o.getOrderItem().getItemPrice() * o.getOrderItemQuantity());
+        }
+        setOderTotal(total);
+    }
+
+    public boolean payment() {
+        calculateTotal();
+        setOrderStatus(false);
+        return true;
+    }
+
+    public boolean deleteOrderItem(OrderItem item) {
+        return orderItemList.remove(item);
     }
 
 
