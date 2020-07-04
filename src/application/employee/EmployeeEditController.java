@@ -2,8 +2,8 @@ package application.employee;
 
 import application.App;
 import application.filemanager.FileManager;
+import application.library.PasswordDialog;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,14 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -90,15 +88,22 @@ public class EmployeeEditController implements Initializable {
 
     public void resetPassword() {
         String code = codeText.getText();
-        TextInputDialog passwordInputDialog = new TextInputDialog();
-        passwordInputDialog.setHeaderText("Enter your password.");
-        passwordInputDialog.showAndWait();
-        String inputResult = passwordInputDialog.getEditor().getText();
-        EmployeeManager.getEmployeeByCode(code).resetPassword(App.currentUser,inputResult);
+        PasswordDialog passwordInputDialog = new PasswordDialog();
+        Optional<String> inputResult = passwordInputDialog.showAndWait();
+        boolean isDone = EmployeeManager.getEmployeeByCode(code).resetPassword(App.currentUser, inputResult.get());
+        System.out.println(inputResult.toString());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("System information");
+        if (isDone) {
+            alert.setContentText("Reset password successfully.");
+        }else{
+            alert.setContentText("You has entered wrong password. Resetting was cancelled.");
+        }
+        alert.showAndWait();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        accessTypeCombo.getItems().addAll("manager","staff");
+        accessTypeCombo.getItems().addAll("manager", "staff");
     }
 }
