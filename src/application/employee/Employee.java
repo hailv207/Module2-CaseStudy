@@ -13,6 +13,7 @@ public class Employee implements Serializable {
     private String password;
     private boolean status;
     private LocalDate birthday;
+    // bug
 
     public Employee(String code, String name, String address, String idNumber, LocalDate birthday, String accessType, boolean status) {
         this.password = DEFAULT_PASS;
