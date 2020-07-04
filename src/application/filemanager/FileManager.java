@@ -22,7 +22,6 @@ public class FileManager<T> {
 
     public List<T> read(String filePath){
         List<T> resultList = new ArrayList<>();
-        //File file = new File(filePath);
         try {
             FileInputStream fis = new FileInputStream(filePath);
             ObjectInputStream ois = new ObjectInputStream(fis);

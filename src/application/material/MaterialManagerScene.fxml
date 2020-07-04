@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="application.MaterialManagerScene"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <AnchorPane prefHeight="37.0" prefWidth="892.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="119.0" layoutY="5.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" text="New" />
+            <Button layoutX="302.0" layoutY="5.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" text="Edit" />
+            <TextField layoutX="475.0" layoutY="5.0" prefHeight="27.0" prefWidth="256.0" promptText="Type to search" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="197.0" text="Material code" />
+          <TableColumn minWidth="7.0" prefWidth="398.0" text="Material name" />
+            <TableColumn prefWidth="150.0" text="Unit" />
+            <TableColumn prefWidth="115.0" text="In stock" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

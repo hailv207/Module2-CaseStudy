@@ -52,7 +52,7 @@ public class EmployeeAddController implements Initializable {
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("System information");
-            alert.setContentText("Add new employee unsuccessfully.");
+            alert.setContentText("The employee code can not be duplicated. Adding new employee was cancelled.");
             alert.showAndWait();
         }
     }

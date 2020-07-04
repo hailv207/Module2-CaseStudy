@@ -2,6 +2,7 @@ package application.employee;
 
 import application.App;
 import application.filemanager.FileManager;
+import application.library.PasswordDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.scene.Node;
@@ -57,18 +59,28 @@ public class EmployeeManagerController implements Initializable {
 
 
     public void changeSceneEditEmployee(ActionEvent event) throws IOException {
-        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("EmployeeEditScene.fxml"));
-        Parent employeeEditView = loader.load();
-        Scene scene = new Scene(employeeEditView);
-        stage.setTitle("Edit Employee");
-        stage.setScene(scene);
-        EmployeeEditController controller = loader.getController();
-        Employee employee = table.getSelectionModel().getSelectedItem();
-        controller.setEmployee(employee);
-        stage.setScene(scene);
+        if (table.getSelectionModel().getSelectedItem() != null){
+            Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("EmployeeEditScene.fxml"));
+            Parent employeeEditView = loader.load();
+            Scene scene = new Scene(employeeEditView);
+            stage.setTitle("Edit Employee");
+            stage.setScene(scene);
+            EmployeeEditController controller = loader.getController();
+            Employee employee = table.getSelectionModel().getSelectedItem();
+            controller.setEmployee(employee);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("System information");
+            alert.setContentText("No employee was selected.");
+            alert.showAndWait();
+        }
+
     }
+
     public void changeSceneAddEmployee(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
@@ -77,36 +89,45 @@ public class EmployeeManagerController implements Initializable {
         Scene scene = new Scene(employeeAddView);
         stage.setTitle("Add new Employee");
         stage.setScene(scene);
-        stage.setScene(scene);
+        stage.centerOnScreen();
     }
-    public void deleteEmployee(){
+
+    public void deleteEmployee() {
         Employee employee = table.getSelectionModel().getSelectedItem();
-        TextInputDialog passwordInputDialog = new TextInputDialog();
-        passwordInputDialog.setHeaderText("Enter your password.");
-        passwordInputDialog.showAndWait();
-        String inputResult = passwordInputDialog.getEditor().getText();
-        boolean authorized = EmployeeManager.getEmployeeByCode(App.currentUser).getAuthorized(App.currentUser, inputResult);
+        if (employee == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("System information");
+            alert.setContentText("No employee selected. Deleting was cancelled.");
+            alert.showAndWait();
+            return;
+        }
+        PasswordDialog passwordInputDialog = new PasswordDialog();
+        Optional<String> inputResult = passwordInputDialog.showAndWait();
+        boolean authorized = EmployeeManager.getEmployeeByCode(App.currentUser).getAuthorized(App.currentUser, inputResult.get());
         if (authorized) {
-            if (EmployeeManager.deleteEmployee(EmployeeManager.getEmployeeByCode(employee.getCode()))){
+            if (EmployeeManager.deleteEmployee(EmployeeManager.getEmployeeByCode(employee.getCode()))) {
                 FileManager fileManager = new FileManager();
-                fileManager.write(PATH_EMPLOYEE,EmployeeManager.getEmployees());
+                fileManager.write(PATH_EMPLOYEE, EmployeeManager.getEmployees());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("System information");
-                alert.setContentText("Delete employee successfully.");
+                alert.setContentText("Deleted employee successfully.");
                 alert.showAndWait();
-            }else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("System information");
-                alert.setContentText("Delete employee unsuccessfully.");
+                alert.setContentText("Deleting failed.");
                 alert.showAndWait();
             }
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("System information");
             alert.setContentText("Your password is incorrect. Deleting was cancelled.");
             alert.showAndWait();
         }
-
-
+        reloadEmployees();
+    }
+    public void reloadEmployees(){
+        table.getItems().clear();
+        table.getItems().addAll(EmployeeManager.getEmployees());
     }
 }
