@@ -1,12 +1,13 @@
 package application.menu;
 
-//import application.material.MaterialItem;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MenuItem extends MenuManager implements Serializable {
-    private int ID;
     private String itemCode;
     private String itemName;
     private String itemUnit;
@@ -16,7 +17,7 @@ public class MenuItem extends MenuManager implements Serializable {
 
     public MenuItem(String itemCode, String itemName, String unit,long itemPrice,boolean status) {
         this.itemCode = itemCode;
-        this.itemName = itemName;
+        this.itemName=itemName;
         this.itemUnit = unit;
         this.itemPrice = itemPrice;
         this.status = status;
@@ -35,7 +36,7 @@ public class MenuItem extends MenuManager implements Serializable {
     }
 
     public void setItemName(String itemName) {
-        this.itemName = itemName;
+        this.itemName=itemName;
     }
 
     public long getItemPrice() {
@@ -63,7 +64,7 @@ public class MenuItem extends MenuManager implements Serializable {
     }
 
     public boolean addMenuItem(String itemCode, String itemName, String unit,long itemPrice, boolean status){
-        boolean check = checkID(itemCode);
+        boolean check = checkItemCode(itemCode);
         if (!check){
             materialList.add(new MenuItem(itemCode, itemName, unit, itemPrice, status));
         }else {
@@ -75,7 +76,7 @@ public class MenuItem extends MenuManager implements Serializable {
     public boolean deleteMenuItem(String itemCode){
         boolean check = false;
         for (int i = 0; i < materialList.size(); i++){
-            if (checkID(itemName)){
+            if (checkItemCode(itemName)){
                 materialList.remove(materialList.get(i));
                 check = true;
             }
@@ -84,7 +85,7 @@ public class MenuItem extends MenuManager implements Serializable {
 
     }
 
-    public boolean checkID(String id){
+    public boolean checkItemCode(String id){
         boolean check = false;
         for (int i = 0; i < materialList.size(); i++){
             if (materialList.get(i).getItemCode().equals(id)){
@@ -92,5 +93,10 @@ public class MenuItem extends MenuManager implements Serializable {
             }
         }
         return check;
+    }
+
+    @Override
+    public String toString() {
+        return getItemName() + " (" + getItemUnit() + ")";
     }
 }

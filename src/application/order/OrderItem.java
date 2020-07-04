@@ -1,39 +1,45 @@
 package application.order;
 
-public class OrderItem {
-    private String orderItemName;
-    private String orderItemUnit;
-    private int orderItemQuantity;
-    private long orderItemPrice;
+import application.menu.MenuItem;
+import javafx.beans.property.ObjectProperty;
 
-    public OrderItem(String orderItemName, String orderItemUnit, int orderItemQuantity, long orderItemPrice) {
-        this.orderItemName = orderItemName;
-        this.orderItemUnit = orderItemUnit;
+import java.awt.*;
+import java.io.Serializable;
+
+
+public class OrderItem implements Serializable {
+    private MenuItem orderItem;
+    private int orderItemQuantity;
+    private String orderItemName;
+
+    public MenuItem getOrderItem() {
+        return orderItem;
+    }
+
+    public OrderItem(MenuItem orderItem, int orderItemQuantity) {
+        this.orderItem = orderItem;
         this.orderItemQuantity = orderItemQuantity;
-        this.orderItemPrice = orderItemPrice;
+        this.orderItemName = orderItem.toString();
     }
 
     public String getOrderItemName() {
         return orderItemName;
     }
 
-    public String getOrderItemUnit() {
-        return orderItemUnit;
+    public void setOrderItemName(String orderItemName) {
+        this.orderItemName = orderItemName;
     }
 
     public int getOrderItemQuantity() {
         return orderItemQuantity;
     }
 
-    public long getOrderItemPrice() {
-        return orderItemPrice;
-    }
     public void increaseQuantity() {
         orderItemQuantity += 1;
     }
 
     public void decreaseQuantity() {
-        if (orderItemQuantity > 0) {
+        if (orderItemQuantity > 1) {
             orderItemQuantity -= 1;
         }
     }

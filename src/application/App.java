@@ -11,7 +11,7 @@ import java.net.URL;
 public class App extends Application {
 
     public static final String PATH_MENU = "src/application/menu/data/menu.dat";
-    public static final String PATH_ORDER = "src/application/order/data/data.dat";
+    public static final String PATH_ORDER = "src/application/order/data/orders.dat";
     public static final String PATH_EMPLOYEE = "src/application/employee/data/employees.dat";
     public static String currentUser;
 

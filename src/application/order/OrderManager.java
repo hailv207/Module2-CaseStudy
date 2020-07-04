@@ -5,31 +5,20 @@ import application.filemanager.FileManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderManager {
-    private static List<Order> OrderList;
-    public OrderManager(){
-        if (OrderList == null) {
-            OrderList = new ArrayList<>();
-            FileManager<Order> fileManager = new FileManager();
-            OrderList = fileManager.read(App.PATH_ORDER);
-        }
-    }
+public abstract class OrderManager {
+    private static List<Order> OrderList = new ArrayList<>();
 
-    public List<Order> getOrderList(){
+    public static List<Order> getOrderList(){
         return OrderList;
     }
 
-    public void add(Order order){
-        OrderList.add(order);
+    public static boolean add(Order order){
+       return OrderList.add(order);
     }
 
-    public void remove(Order order){
-        OrderList.remove(order);
+    public static boolean remove(Order order){
+       return OrderList.remove(order);
     }
 
-    public void saveFile(){
-        FileManager<Order> fileManager = new FileManager();
-        fileManager.write(App.PATH_ORDER, OrderList);
-    }
 
 }
