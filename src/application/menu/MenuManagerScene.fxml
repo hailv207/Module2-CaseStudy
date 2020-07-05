@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TableView prefHeight="400.0" prefWidth="493.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="180.0" text="Menu code" />
+          <TableColumn prefWidth="438.0" text="Menu name" />
+            <TableColumn prefWidth="101.0" text="Unit" />
+            <TableColumn prefWidth="103.0" text="Price" />
+            <TableColumn prefWidth="63.0" text="Status" />
+        </columns>
+      </TableView>
+   </center>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="120.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="10.0" layoutY="37.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" text="New" />
+            <Button layoutX="10.0" layoutY="89.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" text="Edit" />
+            <Button layoutX="10.0" layoutY="140.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" text="Cancel" />
+         </children>
+      </AnchorPane>
+   </right>
+   <top>
+      <AnchorPane prefHeight="32.0" prefWidth="1007.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField layoutY="1.0" prefHeight="27.0" prefWidth="408.0" promptText="Type to search menu by name" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

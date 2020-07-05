@@ -6,9 +6,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="application.managerOverview.ManagerOverviewScene"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.managerOverview.ManagerOverviewController">
+   <center>
+      <AnchorPane prefHeight="331.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+          <children>
+              <Button layoutX="27.0" layoutY="71.0" mnemonicParsing="false" onAction="#changeSceneEmployeeManager" prefHeight="27.0" prefWidth="226.0" text="Employee management" />
+              <Button layoutX="27.0" layoutY="122.0" mnemonicParsing="false" onAction="#changeSceneMenuManager" prefHeight="27.0" prefWidth="226.0" text="Menu management" />
+              <Button layoutX="27.0" layoutY="224.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="226.0" text="Stock management" />
+              <Button layoutX="27.0" layoutY="172.0" mnemonicParsing="false" onAction="#changeSceneMaterialManager" prefHeight="27.0" prefWidth="226.0" text="Material management" />
+              <Button layoutX="27.0" layoutY="271.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="226.0" text="Report" />
+            <Label fx:id="timeLabel" layoutX="27.0" layoutY="14.0" prefHeight="24.0" prefWidth="224.0" />
+            <Label fx:id="welcomeLabel" layoutX="27.0" layoutY="38.0" prefHeight="24.0" prefWidth="224.0" />
+          </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

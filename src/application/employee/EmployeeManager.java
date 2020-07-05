@@ -1,5 +1,8 @@
 package application.employee;
 
+import application.App;
+import application.filemanager.FileManager;
+
 import java.util.*;
 
 public abstract class EmployeeManager {
@@ -39,6 +42,18 @@ public abstract class EmployeeManager {
     public static List<Employee> getEmployees() {
         return employees;
     }
-
+public static boolean readFile(){
+    FileManager<Employee> fileManager = new FileManager<>();
+    List<Employee> list = fileManager.read(App.PATH_EMPLOYEE);
+    for (Employee e:list){
+        EmployeeManager.addNewEmployee(e);
+    }
+    return true;
+}
+public static boolean writeFile(){
+    FileManager<Employee> fileManager = new FileManager<>();
+    fileManager.write(App.PATH_EMPLOYEE, employees);
+    return true;
+}
 
 }

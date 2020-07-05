@@ -130,4 +130,14 @@ public class EmployeeManagerController implements Initializable {
         table.getItems().clear();
         table.getItems().addAll(EmployeeManager.getEmployees());
     }
+    public void cancel(ActionEvent event) throws IOException {
+        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(App.getResource("managerOverview/ManagerOverviewScene.fxml"));
+        Parent employeeAddView = loader.load();
+        Scene scene = new Scene(employeeAddView);
+        stage.setTitle("Manager Overview");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+    }
 }

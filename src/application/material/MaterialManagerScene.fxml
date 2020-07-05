@@ -4,25 +4,33 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <AnchorPane prefHeight="37.0" prefWidth="892.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button layoutX="119.0" layoutY="5.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" text="New" />
-            <Button layoutX="302.0" layoutY="5.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" text="Edit" />
-            <TextField layoutX="475.0" layoutY="5.0" prefHeight="27.0" prefWidth="256.0" promptText="Type to search" />
-         </children>
-      </AnchorPane>
-   </bottom>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.material.MaterialManagerController">
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="materialTable" prefHeight="471.0" prefWidth="784.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="197.0" text="Material code" />
-          <TableColumn minWidth="7.0" prefWidth="398.0" text="Material name" />
-            <TableColumn prefWidth="150.0" text="Unit" />
-            <TableColumn prefWidth="115.0" text="In stock" />
+          <TableColumn fx:id="materialCodeCol" prefWidth="185.0" text="Material code" />
+          <TableColumn fx:id="materialNameCol" minWidth="7.0" prefWidth="257.0" text="Material name" />
+            <TableColumn fx:id="materialSupplierCol" prefWidth="111.0" text="Supplier" />
+            <TableColumn fx:id="materialUnitCol" prefWidth="108.0" text="Unit" />
+            <TableColumn fx:id="materialInStockCol" prefWidth="102.0" text="In stock" />
+            <TableColumn fx:id="materialStatusCol" prefWidth="89.0" text="Status" />
         </columns>
       </TableView>
    </center>
+   <right>
+      <AnchorPane prefHeight="478.0" prefWidth="131.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="20.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNewMaterial" prefHeight="27.0" prefWidth="88.0" text="New" />
+            <Button layoutX="22.0" layoutY="77.0" mnemonicParsing="false" onAction="#editMaterial" prefHeight="27.0" prefWidth="88.0" text="Edit" />
+            <Button layoutX="22.0" layoutY="146.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="88.0" text="Cancel" />
+         </children>
+      </AnchorPane>
+   </right>
+   <top>
+      <AnchorPane prefHeight="29.0" prefWidth="985.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="searchText" layoutY="1.0" prefHeight="27.0" prefWidth="445.0" promptText="Type to search material by name" />
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

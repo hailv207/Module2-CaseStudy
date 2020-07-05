@@ -33,11 +33,7 @@ public class LoginController {
         String pass = password.getText();
 
 
-        FileManager<Employee> employeeFileManager = new FileManager<>();
-        List<Employee> list = employeeFileManager.read(App.PATH_EMPLOYEE);
-        for (Employee employee:list){
-            EmployeeManager.addNewEmployee(employee);
-        }
+        EmployeeManager.readFile();
         Employee employee = EmployeeManager.getEmployeeByCode(user);
         System.out.println(employee);
         try{

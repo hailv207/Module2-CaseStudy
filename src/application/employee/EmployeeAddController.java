@@ -82,6 +82,7 @@ public class EmployeeAddController implements Initializable {
         Scene scene = new Scene(employeeManagerView);
         stage.setTitle("Employee Manager");
         stage.setScene(scene);
+        stage.centerOnScreen();
     }
 
 }

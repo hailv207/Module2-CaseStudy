@@ -1,11 +1,13 @@
 package application.menu;
 
 
+import application.material.MenuMaterialItem;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuItem extends MenuManager implements Serializable {
     private String itemCode;
@@ -13,11 +15,11 @@ public class MenuItem extends MenuManager implements Serializable {
     private String itemUnit;
     private long itemPrice;
     private boolean status;
-    private ArrayList<MenuItem> materialList = new ArrayList<>();
+    private List<MenuMaterialItem> materialList = new ArrayList<>();
 
-    public MenuItem(String itemCode, String itemName, String unit,long itemPrice,boolean status) {
+    public MenuItem(String itemCode, String itemName, String unit, long itemPrice, boolean status) {
         this.itemCode = itemCode;
-        this.itemName=itemName;
+        this.itemName = itemName;
         this.itemUnit = unit;
         this.itemPrice = itemPrice;
         this.status = status;
@@ -36,7 +38,7 @@ public class MenuItem extends MenuManager implements Serializable {
     }
 
     public void setItemName(String itemName) {
-        this.itemName=itemName;
+        this.itemName = itemName;
     }
 
     public long getItemPrice() {
@@ -63,37 +65,31 @@ public class MenuItem extends MenuManager implements Serializable {
         this.status = status;
     }
 
-    public boolean addMenuItem(String itemCode, String itemName, String unit,long itemPrice, boolean status){
-        boolean check = checkItemCode(itemCode);
-        if (!check){
-            materialList.add(new MenuItem(itemCode, itemName, unit, itemPrice, status));
-        }else {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean deleteMenuItem(String itemCode){
-        boolean check = false;
-        for (int i = 0; i < materialList.size(); i++){
-            if (checkItemCode(itemName)){
-                materialList.remove(materialList.get(i));
-                check = true;
+    public boolean addNewMaterial(MenuMaterialItem item) {
+        for (MenuMaterialItem m: materialList){
+            if (m.getMenuMaterialType().getMaterialCode().equals(item.getMenuMaterialType().getMaterialCode())){
+                return false;
             }
         }
-        return check;
-
+        return materialList.add(item);
     }
-
-    public boolean checkItemCode(String id){
-        boolean check = false;
-        for (int i = 0; i < materialList.size(); i++){
-            if (materialList.get(i).getItemCode().equals(id)){
-                check = true;
+    public boolean deleteMaterial(MenuMaterialItem item) {
+        for (MenuMaterialItem m: materialList){
+            if (m.getMenuMaterialType().getMaterialCode().equals(item.getMenuMaterialType().getMaterialCode())){
+                return materialList.remove(m);
             }
         }
-        return check;
+        return false;
     }
+
+    public List<MenuMaterialItem> getMaterialList() {
+        return materialList;
+    }
+
+    public void setMaterialList(List<MenuMaterialItem> materialList) {
+        this.materialList = materialList;
+    }
+
 
     @Override
     public String toString() {

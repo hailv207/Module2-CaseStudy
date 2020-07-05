@@ -45,9 +45,10 @@
    <bottom>
       <AnchorPane prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="270.0" layoutY="9.0" mnemonicParsing="false" onAction="#changeSceneEditEmployee" prefHeight="27.0" prefWidth="126.0" text="Edit" />
-            <Button layoutX="503.0" layoutY="9.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="27.0" prefWidth="126.0" text="Delete" />
-            <Button layoutX="734.0" layoutY="9.0" mnemonicParsing="false" onAction="#changeSceneAddEmployee" prefHeight="27.0" prefWidth="126.0" text="Add" />
+            <Button layoutX="357.0" layoutY="8.0" mnemonicParsing="false" onAction="#changeSceneEditEmployee" prefHeight="27.0" prefWidth="126.0" text="Edit" />
+            <Button layoutX="603.0" layoutY="8.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="27.0" prefWidth="126.0" text="Delete" />
+            <Button layoutX="119.0" layoutY="9.0" mnemonicParsing="false" onAction="#changeSceneAddEmployee" prefHeight="27.0" prefWidth="126.0" text="Add" />
+            <Button layoutX="848.0" layoutY="9.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="126.0" text="Cancel" />
          </children>
       </AnchorPane>
    </bottom>

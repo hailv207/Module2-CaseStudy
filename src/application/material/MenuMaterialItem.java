@@ -2,11 +2,17 @@ package application.material;
 
 public class MenuMaterialItem {
     private MaterialType itemType;
-    private double quantity;
+    private long quantity;
+    private String menuMaterialItemDisplay;
 
-    public MenuMaterialItem(MaterialType materialType, double quantity) {
+    public MenuMaterialItem(MaterialType materialType, long quantity) {
         itemType = materialType;
         this.quantity = quantity;
+        menuMaterialItemDisplay = itemType.toString();
+    }
+
+    public String getMaterialDisplay() {
+        return menuMaterialItemDisplay;
     }
 
     public MaterialType getMenuMaterialType() {
@@ -21,7 +27,7 @@ public class MenuMaterialItem {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 }
