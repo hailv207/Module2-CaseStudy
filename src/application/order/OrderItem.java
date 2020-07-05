@@ -1,9 +1,7 @@
 package application.order;
 
 import application.menu.MenuItem;
-import javafx.beans.property.ObjectProperty;
 
-import java.awt.*;
 import java.io.Serializable;
 
 
