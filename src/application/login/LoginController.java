@@ -7,6 +7,7 @@ import application.material.MaterialManager;
 import application.menu.MenuManager;
 import application.order.Order;
 import application.order.OrderManager;
+import application.stockmanager.StockInReceipt;
 import application.stockmanager.StockInReceiptManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -36,14 +39,14 @@ public class LoginController {
                 MenuManager.readFile();
                 MaterialManager.readFile();
                 StockInReceiptManager.readFile();
+                OrderManager.readFile();
+                FileReader fr = new FileReader(App.PATH_RECEIPTCOUNTER);
+                Long value = Long.valueOf(fr.read());
+               StockInReceipt.setStockInReceiptCounter(value);
                 String accessType = employee.getAccessType();
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     if (accessType.equals("staff")){
-                        FileManager<Order> fileManager = new FileManager<>();
-                        for (Order o: fileManager.read(App.PATH_ORDER) ){
-                            OrderManager.add(o);
-                        }
                         loader.setLocation(App.getResource("order/order.fxml"));
                     } else if (accessType.equals("manager")){
 

@@ -41,7 +41,7 @@ public class MenuManagerController implements Initializable {
         menuNameCol.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("itemName"));
         menuUnitCol.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("itemUnit"));
         menuPriceCol.setCellValueFactory(new PropertyValueFactory<MenuItem, Long>("itemPrice"));
-        menuStatusCol.setCellValueFactory(new PropertyValueFactory<MenuItem, Boolean>("itemStatus"));
+        menuStatusCol.setCellValueFactory(new PropertyValueFactory<MenuItem, Boolean>("status"));
         menuTable.getItems().clear();
         menuTable.getItems().addAll(MenuManager.getMenuList());
     }

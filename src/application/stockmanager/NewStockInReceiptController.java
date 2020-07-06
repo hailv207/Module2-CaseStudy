@@ -41,7 +41,15 @@ public class NewStockInReceiptController implements Initializable {
     @FXML
     TextField stockInReceiptContentText;
 
-    StockInReceipt newStockInReceipt = new StockInReceipt();
+    StockInReceipt newStockInReceipt;
+
+    {
+        try {
+            newStockInReceipt = new StockInReceipt();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,7 +64,7 @@ public class NewStockInReceiptController implements Initializable {
         stockInItemTable.getItems().addAll(newStockInReceipt.getStockInItemList());
     }
 
-    public void save() {
+    public void save() throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("System information");
         alert.setContentText("Caution: You can not edit Stock in receipt once you had saved it. Please check details of Stock in receipt carefully!");

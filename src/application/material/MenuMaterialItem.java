@@ -41,7 +41,7 @@ public class MenuMaterialItem implements Serializable {
         itemType = materialType;
     }
 
-    public double getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

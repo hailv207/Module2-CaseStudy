@@ -1,5 +1,9 @@
 package application.stockmanager;
 
+import application.App;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,20 +12,27 @@ import java.util.List;
 import static application.App.currentUser;
 
 public class StockInReceipt implements Serializable {
-    private static long stockInReceiptCounter = 0;
     private String updater;
     private String stockInReceiptCode;
     private List<StockInItem> stockInItemList;
     private long totalPayment;
     private LocalDate stockInDate;
     private String stockInContent;
+    private static long stockInReceiptCounter = 0;
 
-    public StockInReceipt() {
-       this.stockInReceiptCounter += 1;
-       this.stockInReceiptCode = "sir" + this.stockInReceiptCounter;
+    public StockInReceipt() throws IOException {
+       this.stockInReceiptCode = "sir" + stockInReceiptCounter;
        this.stockInItemList = new ArrayList<>();
        this.stockInDate = LocalDate.now();
        this.updater = currentUser;
+       stockInReceiptCounter++;
+        FileWriter fw = new FileWriter(App.PATH_RECEIPTCOUNTER);
+        fw.write(String.valueOf(stockInReceiptCounter));
+        fw.close();
+    }
+
+    public static void setStockInReceiptCounter(long stockInReceiptCounter) {
+        StockInReceipt.stockInReceiptCounter = stockInReceiptCounter;
     }
 
     public String getUpdater() {
@@ -42,11 +53,6 @@ public class StockInReceipt implements Serializable {
 
     public LocalDate getStockInDate() {
         return stockInDate;
-    }
-
-
-    public static long getStockInReceiptCounter() {
-        return stockInReceiptCounter;
     }
 
     public String getStockInReceiptCode() {

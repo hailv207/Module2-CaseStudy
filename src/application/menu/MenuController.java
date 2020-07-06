@@ -144,6 +144,7 @@ public class MenuController implements Initializable {
         newOrder.setTableNumber(tableNumber);
         newOrder.calculateTotal();
         OrderManager.add(newOrder);
+        OrderManager.writeFile();
         cancelOrder();
 
     }

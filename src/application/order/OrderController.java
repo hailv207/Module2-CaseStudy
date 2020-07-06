@@ -5,6 +5,10 @@ import application.employee.Employee;
 import application.employee.EmployeeEditController;
 import application.employee.EmployeeManager;
 import application.library.PasswordDialog;
+import application.material.MaterialManager;
+import application.material.MaterialType;
+import application.material.MenuMaterialItem;
+import application.menu.MenuItem;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -73,15 +77,15 @@ public class OrderController implements Initializable {
         orderTotalCol.setCellValueFactory(new PropertyValueFactory<Order, String>("orderTotal"));
         orderDateCol.setCellValueFactory(new PropertyValueFactory<Order, LocalDate>("orderDate"));
         orderTable.getItems().clear();
-        orderTable.getItems().addAll(OrderManager.getOrderList());
+        loadOrder();
     }
 
 
     public void loadOrder() {
-        for (Order o : OrderManager.getOrderList()) {
-            orderTable.getItems().add(o);
-        }
+        orderTable.getItems().clear();
+        orderTable.getItems().addAll(OrderManager.getOrderList());
     }
+
 
     public void createOrder() {
         FXMLLoader loader = new FXMLLoader();
@@ -104,10 +108,12 @@ public class OrderController implements Initializable {
 
     public void deleteOrder(ActionEvent e) {
         Order orderDelete = orderTable.getSelectionModel().getSelectedItem();
-        if (orderDelete != null) {
-            OrderManager.remove(orderDelete);
-            orderTable.getItems().clear();
-            loadOrder();
+        if (orderDelete.isOrderStatus()) {
+            if (orderDelete != null) {
+                OrderManager.remove(orderDelete);
+                OrderManager.writeFile();
+                loadOrder();
+            }
         }
     }
 
@@ -115,7 +121,9 @@ public class OrderController implements Initializable {
         Order orderPayment = orderTable.getSelectionModel().getSelectedItem();
         if (orderPayment != null) {
             orderPayment.payment();
+            updateMaterialInStock(orderPayment);
             orderPayment.setOrderStatus(false);
+            OrderManager.writeFile();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Order payment");
             alert.setContentText("Total = " + orderPayment.getOrderTotal());
@@ -162,5 +170,16 @@ public class OrderController implements Initializable {
         EmployeeManager.changePassword();
     }
 
+    public void updateMaterialInStock(Order order) {
+        for (OrderItem o : order.getOrderItemList()) {
+            for (MenuMaterialItem m : o.getOrderItem().getMaterialList()) {
+                Long value = m.getQuantity() * o.getOrderItemQuantity();
+                String code = m.getMenuMaterialType().getMaterialCode();
+                MaterialType mi = MaterialManager.getMaterialByCode(code);
+                mi.subMaterialInStock(value);
+            }
+        }
+        MaterialManager.writeFile();
+    }
 
 }

@@ -15,6 +15,7 @@ public class App extends Application {
     public static final String PATH_EMPLOYEE = "src/application/employee/data/employees.dat";
     public static final String PATH_MATERIALS = "src/application/material/data/materials.dat";
     public static final String PATH_STOCKINRECEIPT = "src/application/stockmanager/data/stockinreceipts.dat";
+    public static final String PATH_RECEIPTCOUNTER = "src/application/stockmanager/data/receiptcounter.dat";
     public static String currentUser;
 
     public static Stage stage;
