@@ -57,10 +57,17 @@ public class NewStockInReceiptController implements Initializable {
     }
 
     public void save() {
-        newStockInReceipt.setTotalPayment();
-        newStockInReceipt.setStockInContent(stockInReceiptContentText.getText());
-        StockInReceiptManager.addStockInReceipt(newStockInReceipt);
-        StockInReceiptManager.writeFile();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("System information");
+        alert.setContentText("Caution: You can not edit Stock in receipt once you had saved it. Please check details of Stock in receipt carefully!");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+            newStockInReceipt.setTotalPayment();
+            newStockInReceipt.setStockInContent(stockInReceiptContentText.getText());
+            StockInReceiptManager.addStockInReceipt(newStockInReceipt);
+            StockInReceiptManager.writeFile();
+
+        }
     }
 
     public void cancel(ActionEvent event) throws IOException {
@@ -77,6 +84,11 @@ public class NewStockInReceiptController implements Initializable {
     public void addStockInItem() {
         MaterialType material = materialTable.getSelectionModel().getSelectedItem();
         if (material != null) {
+            for (StockInItem s: newStockInReceipt.getStockInItemList()){
+                if (s.getMaterial().getMaterialCode().equals(material.getMaterialCode())){
+                    return;
+                }
+            }
             TextInputDialog dialog = new TextInputDialog();
             dialog.setTitle("Quantity input");
             dialog.setHeaderText("Please enter quantity");

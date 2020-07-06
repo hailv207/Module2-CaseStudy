@@ -14,9 +14,8 @@
       <AnchorPane prefHeight="364.0" prefWidth="92.0" BorderPane.alignment="CENTER">
          <children>
             <Button layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#newStockInReceipt" prefHeight="27.0" prefWidth="68.0" text="New" />
-            <Button layoutX="14.0" layoutY="86.0" mnemonicParsing="false" onAction="#editStockInReceipt" prefHeight="27.0" prefWidth="68.0" text="Edit" />
-            <Button layoutX="14.0" layoutY="140.0" mnemonicParsing="false" onAction="#deleteStockInReceipt" prefHeight="27.0" prefWidth="68.0" text="Delete" />
-            <Button layoutX="14.0" layoutY="190.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="68.0" text="Cancel" />
+            <Button layoutX="14.0" layoutY="91.0" mnemonicParsing="false" onAction="#deleteStockInReceipt" prefHeight="27.0" prefWidth="68.0" text="Delete" />
+            <Button layoutX="14.0" layoutY="153.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="68.0" text="Cancel" />
          </children>
       </AnchorPane>
    </right>

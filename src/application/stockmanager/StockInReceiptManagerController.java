@@ -55,16 +55,6 @@ public class StockInReceiptManagerController implements Initializable {
         stage.centerOnScreen();
     }
 
-    public void editStockInReceipt(ActionEvent event) throws IOException {
-        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(App.getResource("stockmanager/EditStockInReceiptScene.fxml"));
-        Parent employeeAddView = loader.load();
-        Scene scene = new Scene(employeeAddView);
-        stage.setTitle("Edit stock in receipt");
-        stage.setScene(scene);
-        stage.centerOnScreen();
-    }
 
     public void deleteStockInReceipt() {
         StockInReceipt s = stockInReceiptTable.getSelectionModel().getSelectedItem();
@@ -77,6 +67,7 @@ public class StockInReceiptManagerController implements Initializable {
             if (authorized) {
                 if (StockInReceiptManager.deleteStockInReceipt(s)) {
                     StockInReceiptManager.writeFile();
+                    refreshStockInReceiptTable();
                     alert.setContentText("Deleted stock in receipt successfully");
                 }
             } else {
@@ -97,6 +88,10 @@ public class StockInReceiptManagerController implements Initializable {
         stage.setTitle("Stock manager");
         stage.setScene(scene);
         stage.centerOnScreen();
+    }
+    public void refreshStockInReceiptTable(){
+        stockInReceiptTable.getItems().clear();
+        stockInReceiptTable.getItems().addAll(StockInReceiptManager.getStockInReceiptList());
     }
 
 }

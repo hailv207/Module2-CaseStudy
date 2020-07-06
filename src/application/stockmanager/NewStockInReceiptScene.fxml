@@ -16,7 +16,7 @@
                   <TableColumn fx:id="materialUnitCol" prefWidth="84.0" text="Unit" />
                </columns>
             </TableView>
-            <TableView fx:id="stockInItemTable" layoutX="369.0" layoutY="79.0" prefHeight="424.0" prefWidth="636.0">
+            <TableView fx:id="stockInItemTable" layoutX="369.0" layoutY="79.0" onMouseClicked="#editStockInItem" prefHeight="424.0" prefWidth="636.0">
                <columns>
                   <TableColumn fx:id="stockInItemNameCol" prefWidth="360.0" text="Material" />
                   <TableColumn fx:id="stockInItemUnitCol" prefWidth="76.0" text="Unit" />
