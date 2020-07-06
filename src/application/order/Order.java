@@ -1,9 +1,11 @@
 package application.order;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Order implements Serializable {
     private List<OrderItem> orderItemList;
@@ -50,8 +52,11 @@ public class Order implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public long getOrderTotal() {
-        return orderTotal;
+    public String getOrderTotal() {
+        String total = null;
+        NumberFormat n = NumberFormat.getInstance(new Locale("vi", "VI"));
+        total = n.format(this.orderTotal);
+        return total;
     }
 
     public void setOderTotal(long orderTotal) {

@@ -42,16 +42,13 @@ public abstract class MenuManager {
 
     public static boolean readFile() {
         FileManager<MenuItem> fileManager = new FileManager<>();
-        List<MenuItem> list = fileManager.read("src/application/menu/data/menu.dat");
-        for (MenuItem item : list) {
-            menuList.add(item);
-        }
+       MenuManager.getMenuList().addAll(fileManager.read(App.PATH_MENU));
         return true;
     }
 
     public static boolean writeFile() {
         FileManager<MenuItem> fileManager = new FileManager<>();
-        fileManager.write("src/application/menu/data/menu.dat", menuList);
+        fileManager.write(App.PATH_MENU, menuList);
         return true;
     }
 

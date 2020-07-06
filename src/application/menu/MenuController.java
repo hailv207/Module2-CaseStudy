@@ -135,21 +135,31 @@ public class MenuController implements Initializable {
         }
     }
 
-    public void saveOrder(ActionEvent e) {
-       String tableNumber = tableNumberText.getText();
-       if (!tableNumber.equals("")){
-           newOrder.setTableNumber(tableNumber);
-           newOrder.calculateTotal();
-           OrderManager.add(newOrder);
-           FileManager<Order> fileManager = new FileManager<>();
-           fileManager.write(App.PATH_ORDER, OrderManager.getOrderList());
-           cancelOrder();
-       }else {
-           Alert alert = new Alert(Alert.AlertType.INFORMATION);
-           alert.setTitle("System information");
-           alert.setContentText("You should enter the table number before saving order.");
-           alert.showAndWait();
-       }
+    public void saveOrder(ActionEvent event) {
+        String tableNumber = tableNumberText.getText();
+        if (tableNumber.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("System information");
+            alert.setContentText("Table number can not be null.");
+            alert.showAndWait();
+            return;
+        }
+        for (int i = 0; i < OrderManager.getOrderList().size(); i++) {
+            if (OrderManager.getOrderList().get(i).getTableNumber().equals(tableNumber)){
+               if (OrderManager.getOrderList().get(i).isOrderStatus()){
+                   Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                   alert.setTitle("System information");
+                   alert.setContentText("Table number you entered is serving.");
+                   alert.showAndWait();
+                   return;
+               }
+            }
+        }
+        newOrder.setTableNumber(tableNumber);
+        newOrder.calculateTotal();
+        OrderManager.add(newOrder);
+        cancelOrder();
+
     }
 
 }

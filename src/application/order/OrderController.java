@@ -1,6 +1,8 @@
 package application.order;
 
 import application.App;
+import application.employee.Employee;
+import application.employee.EmployeeEditController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +36,7 @@ public class OrderController implements Initializable {
     TableColumn<Order, LocalDate> orderDateCol;
 
     @FXML
-    TableColumn<Order, Long> orderTotalCol;
+    TableColumn<Order, String> orderTotalCol;
 
     Order order = new Order();
 
@@ -43,22 +45,22 @@ public class OrderController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         orderTableNumberCol.setCellValueFactory(new PropertyValueFactory<Order, String>("tableNumber"));
         orderStatusCol.setCellValueFactory(new PropertyValueFactory<Order, Boolean>("orderStatus"));
-        orderTotalCol.setCellValueFactory(new PropertyValueFactory<Order, Long>("orderTotal"));
+        orderTotalCol.setCellValueFactory(new PropertyValueFactory<Order, String>("orderTotal"));
         orderDateCol.setCellValueFactory(new PropertyValueFactory<Order, LocalDate>("orderDate"));
         orderTable.getItems().clear();
         orderTable.getItems().addAll(OrderManager.getOrderList());
     }
 
 
-    public void loadOrder(){
-        for (Order o: OrderManager.getOrderList()){
+    public void loadOrder() {
+        for (Order o : OrderManager.getOrderList()) {
             orderTable.getItems().add(o);
         }
     }
 
-    public void createOrder(){
+    public void createOrder() {
         FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.getResource("menu/menu.fxml"));
+        loader.setLocation(App.getResource("menu/menu.fxml"));
 
         System.out.println(loader);
         Parent menuParent = null;
@@ -75,18 +77,18 @@ public class OrderController implements Initializable {
     }
 
 
-    public void deleteOrder(ActionEvent e){
+    public void deleteOrder(ActionEvent e) {
         Order orderDelete = orderTable.getSelectionModel().getSelectedItem();
-        if (orderDelete != null){
+        if (orderDelete != null) {
             OrderManager.remove(orderDelete);
             orderTable.getItems().clear();
             loadOrder();
         }
     }
 
-    public void paymentOrder(ActionEvent e){
+    public void paymentOrder(ActionEvent e) {
         Order orderPayment = orderTable.getSelectionModel().getSelectedItem();
-        if (orderPayment != null){
+        if (orderPayment != null) {
             orderPayment.payment();
             orderPayment.setOrderStatus(false);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -98,16 +100,34 @@ public class OrderController implements Initializable {
         }
     }
 
-    public void editOrder(ActionEvent e) throws IOException {
-        Order editOrder = orderTable.getSelectionModel().getSelectedItem();
-        if (editOrder != null){
-            Stage stage = (Stage) (((Node) e.getSource()).getScene().getWindow());
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("order/editOrder.fxml"));
-            Parent orderEditView = loader.load();
-            Scene scene = new Scene(orderEditView);
-            stage.setTitle("Edit order");
-            stage.setScene(scene);
+    public void editOrder(ActionEvent event) throws IOException {
+        Order selectedItem = orderTable.getSelectionModel().getSelectedItem();
+
+        if (selectedItem.isOrderStatus()) {
+            if (selectedItem != null) {
+                Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(App.getResource("order/editOrder.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setTitle("Edit Order");
+                stage.setScene(scene);
+                EditOrderController controller = loader.getController();
+                Order order = orderTable.getSelectionModel().getSelectedItem();
+                controller.setOrder(order);
+                stage.setScene(scene);
+                stage.centerOnScreen();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("System information");
+                alert.setContentText("No Order was selected.");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("System information");
+            alert.setContentText("Can not edit paid order.");
+            alert.showAndWait();
         }
     }
 
