@@ -3,10 +3,11 @@ import application.App;
 import application.filemanager.FileManager;
 import application.material.MaterialType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MenuManager {
-    private static List<MenuItem> menuList;
+    private static List<MenuItem> menuList = new ArrayList<>();
 
     public static boolean addMenuItem(MenuItem menuItem) {
         if (isExistID(menuItem.getItemCode())){
@@ -33,10 +34,6 @@ public abstract class MenuManager {
         return check;
     }
     public static List<MenuItem> getMenuList(){
-        if (menuList == null){
-            FileManager fileManager = new FileManager();
-            menuList = fileManager.read(App.PATH_MENU);
-        }
         return menuList;
     }
 

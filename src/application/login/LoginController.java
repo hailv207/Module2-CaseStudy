@@ -3,8 +3,11 @@ import application.App;
 import application.employee.Employee;
 import application.employee.EmployeeManager;
 import application.filemanager.FileManager;
+import application.material.MaterialManager;
+import application.menu.MenuManager;
 import application.order.Order;
 import application.order.OrderManager;
+import application.stockmanager.StockInReceiptManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,6 +43,9 @@ public class LoginController {
                         }
                         loader.setLocation(App.getResource("order/order.fxml"));
                     } else if (accessType.equals("manager")){
+                        MenuManager.readFile();
+                        MaterialManager.readFile();
+                        StockInReceiptManager.readFile();
                         loader.setLocation(App.getResource("managerOverview/ManagerOverviewScene.fxml"));
                     }
                     Parent menuParent = null;

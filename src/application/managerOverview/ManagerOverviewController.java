@@ -3,6 +3,7 @@ package application.managerOverview;
 import application.App;
 import application.material.MaterialManager;
 import application.menu.MenuManager;
+import application.stockmanager.StockInReceiptManager;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -67,8 +68,8 @@ public void changeSceneEmployeeManager(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(App.getResource("menu/MenuManagerScene.fxml"));
-        Parent employeeAddView = loader.load();
-        Scene scene = new Scene(employeeAddView);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
         stage.setTitle("Menu manager");
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -85,7 +86,5 @@ public void changeSceneEmployeeManager(ActionEvent event) throws IOException {
         }), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
-        MaterialManager.readFile();
-        MenuManager.readFile();
     }
 }

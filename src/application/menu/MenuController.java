@@ -52,22 +52,8 @@ public class MenuController implements Initializable {
 
         orderItemName.setCellValueFactory(new PropertyValueFactory<OrderItem, String>("orderItemName"));
         orderQuantityCol.setCellValueFactory(new PropertyValueFactory<OrderItem, Integer>("orderItemQuantity"));
-
-        FileManager<MenuItem> fileManager = new FileManager<>();
-        List<MenuItem> list = new ArrayList<>();
-        list.add(new MenuItem("lonquay", "lon Quay ", "Con", 3000000, true));
-        list.add(new MenuItem("GAQUAY", "Ga Quay ", "Con", 3000000, true));
-        list.add(new MenuItem("choquay", "cho Quay Ha Noi", "Con", 3000000, true));
-
-        fileManager.write(App.PATH_MENU, list);
         menuView.getItems().clear();
-
-        for (MenuItem item : MenuManager.getMenuList()) {
-            System.out.println(item);
-            if (item.isStatus())
-                menuView.getItems().add(item);
-        }
-
+        menuView.getItems().addAll(MenuManager.getMenuList());
 
     }
 
