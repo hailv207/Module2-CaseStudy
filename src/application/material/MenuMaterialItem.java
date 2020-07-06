@@ -1,6 +1,8 @@
 package application.material;
 
-public class MenuMaterialItem {
+import java.io.Serializable;
+
+public class MenuMaterialItem implements Serializable {
     private MaterialType itemType;
     private long quantity;
     private String menuMaterialItemDisplay;
@@ -9,6 +11,22 @@ public class MenuMaterialItem {
         itemType = materialType;
         this.quantity = quantity;
         menuMaterialItemDisplay = itemType.toString();
+    }
+
+    public MaterialType getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(MaterialType itemType) {
+        this.itemType = itemType;
+    }
+
+    public String getMenuMaterialItemDisplay() {
+        return menuMaterialItemDisplay;
+    }
+
+    public void setMenuMaterialItemDisplay(String menuMaterialItemDisplay) {
+        this.menuMaterialItemDisplay = menuMaterialItemDisplay;
     }
 
     public String getMaterialDisplay() {

@@ -1,6 +1,7 @@
 package application.managerOverview;
 
 import application.App;
+import application.employee.EmployeeManager;
 import application.material.MaterialManager;
 import application.menu.MenuManager;
 import application.stockmanager.StockInReceiptManager;
@@ -86,5 +87,8 @@ public void changeSceneEmployeeManager(ActionEvent event) throws IOException {
         }), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
+    }
+    public void changePassword(){
+        EmployeeManager.changePassword();
     }
 }

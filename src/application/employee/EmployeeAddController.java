@@ -41,9 +41,15 @@ public class EmployeeAddController implements Initializable {
     private CheckBox statusCheck;
 
     public void add() {
-        Employee employee = new Employee(codeText.getText(), nameText.getText(), addressText.getText(), idNumberText.getText(), birthdayPicker.getValue(), (String) accessTypeCombo.getValue(), statusCheck.isSelected());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("System information");
+        boolean irLegal = codeText.getText().equals("") || nameText.getText().equals("");
+        if (irLegal) {
+           alert.setContentText("Employee code and name could not be null");
+           alert.showAndWait();
+           return;
+        }
+        Employee employee = new Employee(codeText.getText(), nameText.getText(), addressText.getText(), idNumberText.getText(), birthdayPicker.getValue(), (String) accessTypeCombo.getValue(), statusCheck.isSelected());
         if (EmployeeManager.addNewEmployee(employee)) {
             EmployeeManager.writeFile();
             alert.setContentText("Add new employee successfully.");
@@ -59,7 +65,8 @@ public class EmployeeAddController implements Initializable {
         accessTypeCombo.getSelectionModel().select("staff");
         clear();
     }
-    public void clear(){
+
+    public void clear() {
         nameText.setText("");
         codeText.setText("");
         addressText.setText("");

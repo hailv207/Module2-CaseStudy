@@ -85,7 +85,7 @@ public class StockInReceiptManagerController implements Initializable {
         loader.setLocation(App.getResource("managerOverview/ManagerOverviewScene.fxml"));
         Parent employeeAddView = loader.load();
         Scene scene = new Scene(employeeAddView);
-        stage.setTitle("Stock manager");
+        stage.setTitle("Manager overview");
         stage.setScene(scene);
         stage.centerOnScreen();
     }

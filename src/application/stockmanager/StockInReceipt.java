@@ -1,8 +1,5 @@
 package application.stockmanager;
 
-import application.employee.Employee;
-import application.employee.EmployeeManager;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;

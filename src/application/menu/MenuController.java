@@ -53,7 +53,7 @@ public class MenuController implements Initializable {
         orderItemName.setCellValueFactory(new PropertyValueFactory<OrderItem, String>("orderItemName"));
         orderQuantityCol.setCellValueFactory(new PropertyValueFactory<OrderItem, Integer>("orderItemQuantity"));
         menuView.getItems().clear();
-        menuView.getItems().addAll(MenuManager.getMenuList());
+        loadMenuItems();
 
     }
 
@@ -131,14 +131,14 @@ public class MenuController implements Initializable {
             return;
         }
         for (int i = 0; i < OrderManager.getOrderList().size(); i++) {
-            if (OrderManager.getOrderList().get(i).getTableNumber().equals(tableNumber)){
-               if (OrderManager.getOrderList().get(i).isOrderStatus()){
-                   Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                   alert.setTitle("System information");
-                   alert.setContentText("Table number you entered is serving.");
-                   alert.showAndWait();
-                   return;
-               }
+            if (OrderManager.getOrderList().get(i).getTableNumber().equals(tableNumber)) {
+                if (OrderManager.getOrderList().get(i).isOrderStatus()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("System information");
+                    alert.setContentText("Table number you entered is serving.");
+                    alert.showAndWait();
+                    return;
+                }
             }
         }
         newOrder.setTableNumber(tableNumber);
@@ -146,6 +146,15 @@ public class MenuController implements Initializable {
         OrderManager.add(newOrder);
         cancelOrder();
 
+    }
+
+    public void loadMenuItems() {
+        menuView.getItems().clear();
+        for (MenuItem m : MenuManager.getMenuList()) {
+            if (m.isStatus()) {
+                menuView.getItems().add(m);
+            }
+        }
     }
 
 }

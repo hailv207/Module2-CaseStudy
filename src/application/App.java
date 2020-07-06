@@ -13,6 +13,8 @@ public class App extends Application {
     public static final String PATH_MENU = "src/application/menu/data/menu.dat";
     public static final String PATH_ORDER = "src/application/order/data/orders.dat";
     public static final String PATH_EMPLOYEE = "src/application/employee/data/employees.dat";
+    public static final String PATH_MATERIALS = "src/application/material/data/materials.dat";
+    public static final String PATH_STOCKINRECEIPT = "src/application/stockmanager/data/stockinreceipts.dat";
     public static String currentUser;
 
     public static Stage stage;

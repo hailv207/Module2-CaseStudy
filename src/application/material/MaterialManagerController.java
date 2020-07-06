@@ -1,6 +1,8 @@
 package application.material;
 
 import application.App;
+import application.employee.EmployeeManager;
+import application.library.PasswordDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +16,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static application.App.currentUser;
 
 public class MaterialManagerController implements Initializable {
     @FXML
@@ -87,5 +92,40 @@ public class MaterialManagerController implements Initializable {
         stage.setTitle("Manager overview");
         stage.setScene(scene);
         stage.centerOnScreen();
+    }
+    public void changePassword() {
+        PasswordDialog dialog = new PasswordDialog();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("System information");
+        dialog.setTitle("Confirm password");
+        dialog.setContentText("Please enter your current password");
+        Optional<String> currentPassword = dialog.showAndWait();
+        if (!currentPassword.isPresent()){
+            return;
+        }
+        if (EmployeeManager.getEmployeeByCode(currentUser).getAuthorized(currentUser, currentPassword.get())) {
+            dialog.setTitle("New password");
+            dialog.setContentText("Please enter your new password");
+            dialog.getPasswordField().clear();
+            Optional<String> newPassword = dialog.showAndWait();
+            dialog.setTitle("Confirm new password");
+            dialog.setContentText("Please confirm your new password");
+            dialog.getPasswordField().clear();
+            Optional<String> confirmNewPassword = dialog.showAndWait();
+            if (newPassword.get().equals(confirmNewPassword.get())){
+                boolean isDone = EmployeeManager.getEmployeeByCode(currentUser).changePassword(currentUser,currentPassword.get(),confirmNewPassword.get());
+                if (isDone) {
+                    EmployeeManager.writeFile();
+                    alert.setContentText("Change password successfully");
+                }   else{
+                    alert.setContentText("Change password failed");
+                }
+            }else{
+                alert.setContentText("Your new password was not confirmed. Please try again.");
+            }
+        }else{
+            alert.setContentText("You entered wrong password");
+        }
+        alert.showAndWait();
     }
 }

@@ -1,6 +1,7 @@
 package application.menu;
 
 import application.App;
+import application.material.EditMaterialController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,18 +45,33 @@ public class MenuManagerController implements Initializable {
         menuTable.getItems().clear();
         menuTable.getItems().addAll(MenuManager.getMenuList());
     }
+
     public void newMenu(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(App.getResource("menu/AddNewMenuScene.fxml"));
-        Parent employeeAddView = loader.load();
-        Scene scene = new Scene(employeeAddView);
-        stage.setTitle("Material manager");
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setTitle("Add new menu");
         stage.setScene(scene);
         stage.centerOnScreen();
     }
-    public void editMenu(ActionEvent event){
 
+    public void editMenu(ActionEvent event) throws IOException {
+        MenuItem selectedItem = menuTable.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("EditMenuScene.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setTitle("Edit Menu");
+            stage.setScene(scene);
+            EditMenuController controller = loader.getController();
+            controller.setMenuItem(selectedItem);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+        }
     }
 
     public void cancel(ActionEvent event) throws IOException {

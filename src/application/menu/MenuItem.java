@@ -15,7 +15,7 @@ public class MenuItem extends MenuManager implements Serializable {
     private String itemUnit;
     private long itemPrice;
     private boolean status;
-    private List<MenuMaterialItem> materialList = new ArrayList<>();
+    private List<MenuMaterialItem> materialList;
 
     public MenuItem(String itemCode, String itemName, String unit, long itemPrice, boolean status) {
         this.itemCode = itemCode;
@@ -23,6 +23,9 @@ public class MenuItem extends MenuManager implements Serializable {
         this.itemUnit = unit;
         this.itemPrice = itemPrice;
         this.status = status;
+    }
+    public MenuItem(){
+        this.materialList = new ArrayList<>();
     }
 
     public String getItemCode() {

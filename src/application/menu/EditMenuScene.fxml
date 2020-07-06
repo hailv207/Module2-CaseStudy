@@ -6,34 +6,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="522.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.menu.EditMenuController">
+<AnchorPane prefHeight="522.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.menu.EditMenuController">
     <children>
         <Label layoutX="22.0" layoutY="25.0" prefHeight="23.0" prefWidth="112.0" text="Menu code" />
         <Label layoutX="22.0" layoutY="66.0" prefHeight="23.0" prefWidth="112.0" text="Menu name" />
         <Label layoutX="22.0" layoutY="102.0" prefHeight="23.0" prefWidth="112.0" text="Unit" />
         <Label layoutX="22.0" layoutY="142.0" prefHeight="23.0" prefWidth="112.0" text="Price" />
         <Label layoutX="22.0" layoutY="183.0" prefHeight="23.0" prefWidth="112.0" text="Status" />
-        <TextField layoutX="134.0" layoutY="23.0" prefHeight="27.0" prefWidth="652.0" />
-        <TextField layoutX="134.0" layoutY="64.0" prefHeight="27.0" prefWidth="652.0" />
-        <TextField layoutX="134.0" layoutY="100.0" prefHeight="27.0" prefWidth="652.0" />
-        <TextField layoutX="134.0" layoutY="140.0" prefHeight="27.0" prefWidth="652.0" />
-        <TableView layoutX="22.0" layoutY="258.0" prefHeight="250.0" prefWidth="429.0">
+        <TextField fx:id="menuCodeText" layoutX="134.0" layoutY="23.0" prefHeight="27.0" prefWidth="407.0" />
+        <TextField fx:id="menuNameText" layoutX="134.0" layoutY="64.0" prefHeight="27.0" prefWidth="407.0" />
+        <TextField fx:id="menuUnitText" layoutX="134.0" layoutY="100.0" prefHeight="27.0" prefWidth="407.0" />
+        <TextField fx:id="menuPriceText" layoutX="134.0" layoutY="140.0" prefHeight="27.0" prefWidth="407.0" />
+        <TableView fx:id="materialItemTable" layoutX="22.0" layoutY="252.0" prefHeight="250.0" prefWidth="517.0">
             <columns>
-                <TableColumn prefWidth="346.0" text="Material" />
-                <TableColumn prefWidth="81.0" text="Unit" />
+                <TableColumn fx:id="materialItemNameCol" prefWidth="394.0" text="Material" />
+                <TableColumn fx:id="materialItemQuantityCol" prefWidth="121.0" text="Quantity" />
             </columns>
         </TableView>
-        <TableView layoutX="467.0" layoutY="258.0" prefHeight="250.0" prefWidth="517.0">
-            <columns>
-                <TableColumn prefWidth="364.0" text="Material" />
-                <TableColumn prefWidth="85.0" text="Unit" />
-                <TableColumn prefWidth="67.0" text="Quantity" />
-            </columns>
-        </TableView>
-        <TextField layoutX="22.0" layoutY="231.0" prefHeight="27.0" prefWidth="346.0" promptText="Type to search material by name" />
-        <Button layoutX="811.0" layoutY="152.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="146.0" text="Save" />
-        <Button layoutX="811.0" layoutY="195.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="146.0" text="Cancel" />
-        <CheckBox layoutX="134.0" layoutY="186.0" mnemonicParsing="false" />
-        <Button layoutX="467.0" layoutY="231.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="146.0" text="Remove item" />
+        <Button layoutX="299.0" layoutY="207.0" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="112.0" text="Save" />
+        <Button layoutX="427.0" layoutY="207.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="112.0" text="Cancel" />
+        <CheckBox fx:id="menuStatusCheck" layoutX="134.0" layoutY="186.0" mnemonicParsing="false" />
     </children>
 </AnchorPane>

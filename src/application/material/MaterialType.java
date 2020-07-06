@@ -1,6 +1,8 @@
 package application.material;
 
-public class MaterialType {
+import java.io.Serializable;
+
+public class MaterialType implements Serializable {
     private String materialCode;
     private String materialName;
     private String materialSupplier;
