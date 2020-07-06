@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.order.EditOrderController">
+    <center>
+        <SplitPane dividerPositions="0.558047493403694" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <TableView fx:id="menuView" onMouseClicked="#onClickItem" prefHeight="491.0" prefWidth="589.0">
+                            <columns>
+                                <TableColumn fx:id="menuNameCol" prefWidth="333.0" text="FoodMenu" />
+                                <TableColumn fx:id="unitCol" prefWidth="88.0" text="Unit" />
+                                <TableColumn fx:id="priceCol" prefWidth="167.0" text="Price" />
+                            </columns>
+                        </TableView>
+                        <Button layoutX="222.0" layoutY="511.0" mnemonicParsing="false" onAction="#cancelOrder" prefHeight="44.0" prefWidth="144.0" text="Cancel">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="564.0" prefWidth="386.0">
+                    <children>
+                        <TableView fx:id="orderTable" prefHeight="491.0" prefWidth="468.0">
+                            <columns>
+                                <TableColumn fx:id="orderItemName" prefWidth="391.0" text="Items" />
+                                <TableColumn fx:id="orderQuantityCol" prefWidth="76.0" text="Quantity" />
+                            </columns>
+                        </TableView>
+                        <Button fx:id="increase" layoutX="40.0" layoutY="513.0" mnemonicParsing="false" onAction="#increaseQuantityOrderItem" text="+">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="reduction" layoutX="102.0" layoutY="513.0" mnemonicParsing="false" onAction="#decreaseQuantityOrderItem" prefHeight="31.0" prefWidth="31.0" text="-">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="delete" layoutX="340.0" layoutY="506.0" mnemonicParsing="false" onAction="#deleteOrderItem" prefHeight="31.0" prefWidth="96.0" text="Delete">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="save" layoutX="192.0" layoutY="506.0" mnemonicParsing="false" onAction="#saveOrder" prefHeight="44.0" prefWidth="103.0" text="Save">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </center>
+    <top>
+        <AnchorPane prefHeight="44.0" prefWidth="1061.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button layoutX="31.0" layoutY="10.0" mnemonicParsing="false" text="Button" />
+                <TextField fx:id="tableNumberText" layoutX="594.0" layoutY="10.0" promptText="Table number" />
+            </children>
+        </AnchorPane>
+    </top>
+</BorderPane>

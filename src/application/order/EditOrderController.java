@@ -1,10 +1,9 @@
-package application.menu;
+package application.order;
 
 import application.App;
 import application.filemanager.FileManager;
-import application.order.Order;
-import application.order.OrderItem;
-import application.order.OrderManager;
+import application.menu.MenuItem;
+import application.menu.MenuManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MenuController implements Initializable {
+public class EditOrderController implements Initializable {
     @FXML
     TableView<MenuItem> menuView;
     @FXML
@@ -42,7 +41,7 @@ public class MenuController implements Initializable {
     @FXML
     TextField tableNumberText;
 
-    Order newOrder = new Order();
+    Order newOrder;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,8 +51,22 @@ public class MenuController implements Initializable {
 
         orderItemName.setCellValueFactory(new PropertyValueFactory<OrderItem, String>("orderItemName"));
         orderQuantityCol.setCellValueFactory(new PropertyValueFactory<OrderItem, Integer>("orderItemQuantity"));
+
+        FileManager<MenuItem> fileManager = new FileManager<>();
+        List<MenuItem> list = new ArrayList<>();
+        list.add(new MenuItem("lonquay", "lon Quay ", "Con", 3000000, true));
+        list.add(new MenuItem("GAQUAY", "Ga Quay ", "Con", 3000000, true));
+        list.add(new MenuItem("choquay", "cho Quay Ha Noi", "Con", 3000000, true));
+
+        fileManager.write(App.PATH_MENU, list);
         menuView.getItems().clear();
-        menuView.getItems().addAll(MenuManager.getMenuList());
+
+        for (MenuItem item : MenuManager.getMenuList()) {
+            System.out.println(item);
+            if (item.isStatus())
+                menuView.getItems().add(item);
+        }
+
 
     }
 
@@ -121,31 +134,23 @@ public class MenuController implements Initializable {
         }
     }
 
-    public void saveOrder(ActionEvent event) {
+    public void saveOrder(ActionEvent e) {
         String tableNumber = tableNumberText.getText();
-        if (tableNumber.equals("")) {
+        if (!tableNumber.equals("")){
+            newOrder.setTableNumber(tableNumber);
+            newOrder.calculateTotal();
+            OrderManager.writeFile();
+        }else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("System information");
-            alert.setContentText("Table number can not be null.");
+            alert.setContentText("You should enter the table number before saving order.");
             alert.showAndWait();
-            return;
         }
-        for (int i = 0; i < OrderManager.getOrderList().size(); i++) {
-            if (OrderManager.getOrderList().get(i).getTableNumber().equals(tableNumber)){
-               if (OrderManager.getOrderList().get(i).isOrderStatus()){
-                   Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                   alert.setTitle("System information");
-                   alert.setContentText("Table number you entered is serving.");
-                   alert.showAndWait();
-                   return;
-               }
-            }
-        }
-        newOrder.setTableNumber(tableNumber);
-        newOrder.calculateTotal();
-        OrderManager.add(newOrder);
-        cancelOrder();
-
+    }
+    public  void setOrder(Order order){
+        newOrder = order;
+        tableNumberText.setText(newOrder.getTableNumber());
+        orderTable.getItems().addAll(newOrder.getOrderItemList());
     }
 
 }

@@ -16,9 +16,9 @@
           <TableColumn fx:id="orderStatusCol" prefWidth="140.0" text="Status" />
         </columns>
       </TableView>
-      <Button layoutX="599.0" layoutY="14.0" mnemonicParsing="false" onAction="#createOrder" onMouseClicked="#onNewOrder" text="New order" />
-      <Button layoutX="599.0" layoutY="84.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Edit" />
-      <Button layoutX="599.0" layoutY="152.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Payment" />
-      <Button layoutX="599.0" layoutY="222.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Delete" />
+      <Button layoutX="599.0" layoutY="14.0" mnemonicParsing="false" onAction="#createOrder" text="New order" />
+      <Button layoutX="599.0" layoutY="84.0" mnemonicParsing="false" onAction="#editOrder" prefHeight="25.0" prefWidth="72.0" text="Edit" />
+      <Button layoutX="599.0" layoutY="152.0" mnemonicParsing="false" onAction="#paymentOrder" prefHeight="25.0" prefWidth="72.0" text="Payment" />
+      <Button layoutX="599.0" layoutY="222.0" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="25.0" prefWidth="72.0" text="Delete" />
    </children>
 </AnchorPane>
