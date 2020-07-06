@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.order.OrderController">
+   <center>
+      <SplitPane dividerPositions="0.98125" prefHeight="479.0" prefWidth="113.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="300.0" />
+        </items>
+      </SplitPane>
+   </center>
+   <top>
+      <AnchorPane prefHeight="49.0" prefWidth="736.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="305.0" layoutY="8.0" prefHeight="39.0" prefWidth="127.0" text="Edit order ">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <right>
+      <TableView fx:id="tableedit" prefHeight="479.0" prefWidth="374.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="edititem" prefWidth="291.0" text="Edit Item" />
+          <TableColumn fx:id="editquantyti" prefWidth="82.0" text="Edit Quantyti" />
+        </columns>
+      </TableView>
+   </right>
+   <left>
+      <TableView fx:id="tableview" prefHeight="476.0" prefWidth="355.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="item" prefWidth="275.0" text="Item" />
+          <TableColumn fx:id="quantyti" prefWidth="79.0" text="Quantity" />
+        </columns>
+      </TableView>
+   </left>
+   <bottom>
+      <AnchorPane prefHeight="74.0" prefWidth="736.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="save" layoutX="493.0" layoutY="15.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="119.0" text="Save">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="cancel" layoutX="103.0" layoutY="15.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="119.0" text="Cancel">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>
