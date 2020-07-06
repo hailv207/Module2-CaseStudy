@@ -31,24 +31,19 @@ public class AddMaterialController implements Initializable {
     public void addNewMaterial() {
         MaterialType material = new MaterialType(materialCodeText.getText(), materialNameText.getText()
                 , materialSupplierText.getText(), materialStatusCheck.isSelected(), materialUnitText.getText());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("System information");
         if (material.getMaterialCode() != null && material.getMaterialName() != null && material.getMaterialUnit() != null) {
             if (MaterialManager.addNewMaterial(material)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("System information");
+                MaterialManager.writeFile();
                 alert.setContentText("Material was created successfully.");
-                alert.showAndWait();
             } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("System information");
                 alert.setContentText("Material code is duplicated.");
-                alert.showAndWait();
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("System information");
             alert.setContentText("Material code, name, unit could not be null.");
-            alert.showAndWait();
         }
+        alert.showAndWait();
     }
     public void clear() {
         materialCodeText.setText("");

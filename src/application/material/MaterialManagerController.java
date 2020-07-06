@@ -40,10 +40,10 @@ public class MaterialManagerController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         materialCodeCol.setCellValueFactory(new PropertyValueFactory<MaterialType, String>("materialCode"));
-        materialNameCol.setCellValueFactory(new PropertyValueFactory<MaterialType, String>("materialCode"));
-        materialSupplierCol.setCellValueFactory(new PropertyValueFactory<MaterialType, String>("materialCode"));
+        materialNameCol.setCellValueFactory(new PropertyValueFactory<MaterialType, String>("materialName"));
+        materialSupplierCol.setCellValueFactory(new PropertyValueFactory<MaterialType, String>("materialSupplier"));
         materialUnitCol.setCellValueFactory(new PropertyValueFactory<MaterialType,String>("materialUnit"));
-        materialStatusCol.setCellValueFactory(new PropertyValueFactory<MaterialType, Boolean>("materialCode"));
+        materialStatusCol.setCellValueFactory(new PropertyValueFactory<MaterialType, Boolean>("materialStatus"));
         materialInStockCol.setCellValueFactory(new PropertyValueFactory<MaterialType, Integer>("materialInStock"));
         materialTable.getItems().addAll(MaterialManager.getMaterialList());
     }
@@ -82,9 +82,9 @@ public class MaterialManagerController implements Initializable {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(App.getResource("managerOverview/ManagerOverviewScene.fxml"));
-        Parent employeeAddView = loader.load();
-        Scene scene = new Scene(employeeAddView);
-        stage.setTitle("Add new material");
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setTitle("Manager overview");
         stage.setScene(scene);
         stage.centerOnScreen();
     }

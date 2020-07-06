@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.stockmanager.NewStockInReceiptController">
+   <center>
+      <AnchorPane prefHeight="525.0" prefWidth="1005.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="materialTable" layoutX="14.0" layoutY="79.0" onMouseClicked="#addStockInItem" prefHeight="424.0" prefWidth="351.0">
+               <columns>
+                  <TableColumn fx:id="materialNameCol" prefWidth="266.0" text="Material" />
+                  <TableColumn fx:id="materialUnitCol" prefWidth="84.0" text="Unit" />
+               </columns>
+            </TableView>
+            <TableView fx:id="stockInItemTable" layoutX="369.0" layoutY="79.0" prefHeight="424.0" prefWidth="636.0">
+               <columns>
+                  <TableColumn fx:id="stockInItemNameCol" prefWidth="360.0" text="Material" />
+                  <TableColumn fx:id="stockInItemUnitCol" prefWidth="76.0" text="Unit" />
+                  <TableColumn fx:id="stockInItemQuantityCol" prefWidth="74.0" text="Quantity" />
+                  <TableColumn fx:id="stockInItemTotalCol" prefWidth="125.0" text="Total payment" />
+               </columns>
+            </TableView>
+            <TextField fx:id="stockInReceiptContentText" layoutX="79.0" layoutY="15.0" prefHeight="27.0" prefWidth="926.0" />
+            <Label layoutX="19.0" layoutY="16.0" prefHeight="25.0" prefWidth="119.0" text="Content" />
+            <Button layoutX="43.0" layoutY="516.0" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="103.0" text="Save" />
+            <Button layoutX="215.0" layoutY="516.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="103.0" text="Cancel" />
+            <TextField fx:id="materialSearchText" layoutX="13.0" layoutY="52.0" prefHeight="27.0" prefWidth="268.0" />
+            <Button layoutX="860.0" layoutY="516.0" mnemonicParsing="false" onAction="#removeStockInItem" prefHeight="27.0" prefWidth="131.0" text="Remove item" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -53,6 +53,16 @@ public void changeSceneEmployeeManager(ActionEvent event) throws IOException {
         stage.setScene(scene);
         stage.centerOnScreen();
     }
+    public void changeSceneStockManager(ActionEvent event) throws IOException {
+        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(App.getResource("stockmanager/StockInReceiptManagerScene.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setTitle("Stock manager");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+    }
     public void changeSceneMenuManager(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();

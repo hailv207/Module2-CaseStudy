@@ -45,21 +45,19 @@ public class EditMaterialController {
     }
 
     public void save() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("System information");
         if (materialNameText.getText() != null && materialUnitText.getText() != null) {
             MaterialType material = MaterialManager.getMaterialByCode(materialCodeText.getText());
             material.setMaterialName(materialNameText.getText());
             material.setMaterialUnit(materialUnitText.getText());
             material.setMaterialStatus(materialStatusCheck.isSelected());
             material.setMaterialSupplier(materialSupplierText.getText());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("System information");
+            MaterialManager.writeFile();
             alert.setContentText("Saved change.");
-            alert.showAndWait();
         }else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("System information");
             alert.setContentText("Material name and unit could not be null.");
-            alert.showAndWait();
         }
+        alert.showAndWait();
     }
 }

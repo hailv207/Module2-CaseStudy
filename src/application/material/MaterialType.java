@@ -6,7 +6,7 @@ public class MaterialType {
     private String materialSupplier;
     private boolean materialStatus;
     private String materialUnit;
-    private static long materialInStock = 0;
+    private long materialInStock = 0;
 
     public MaterialType(String materialCode, String materialName, String materialSupplier, boolean materialStatus, String materialUnit) {
         this.materialCode = materialCode;
@@ -37,7 +37,7 @@ public class MaterialType {
     }
 
     public static void setMaterialInStock(long materialInStock) {
-        MaterialType.materialInStock = materialInStock;
+        materialInStock = materialInStock;
     }
 
     public String getMaterialCode() {
@@ -64,16 +64,16 @@ public class MaterialType {
         this.materialUnit = materialUnit;
     }
 
-    public static long getMaterialInStock() {
+    public  long getMaterialInStock() {
         return materialInStock;
     }
 
-    public static void addMaterialInStock(long value) {
-        MaterialType.materialInStock += value;
+    public  void addMaterialInStock(long value) {
+        materialInStock += value;
     }
 
-    public static void subMaterialInStock(long value) {
-            MaterialType.materialInStock -= value;
+    public  void subMaterialInStock(long value) {
+            materialInStock -= value;
     }
 
     @Override

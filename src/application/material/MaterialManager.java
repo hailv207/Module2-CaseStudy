@@ -30,7 +30,7 @@ public abstract class MaterialManager {
     }
 
     public static boolean readFile() {
-        FileManager fileManager = new FileManager();
+        FileManager<MaterialType> fileManager = new FileManager();
         List<MaterialType> list = fileManager.read("src/application/material/data/materials.dat");
         for (MaterialType material : list) {
             materialList.add(material);
@@ -39,7 +39,7 @@ public abstract class MaterialManager {
     }
 
     public static boolean writeFile() {
-        FileManager fileManager = new FileManager();
+        FileManager<MaterialType> fileManager = new FileManager();
         fileManager.write("src/application/material/data/materials.dat", materialList);
         return true;
     }

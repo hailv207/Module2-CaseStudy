@@ -49,7 +49,7 @@ public class LoginController {
                         }
                         loader.setLocation(App.getResource("order/order.fxml"));
                     } else if (accessType.equals("manager")){
-                        loader.setLocation(App.getResource("employee/EmployeeManagerScene.fxml"));
+                        loader.setLocation(App.getResource("managerOverview/ManagerOverviewScene.fxml"));
                     }
                     Parent menuParent = null;
                     try {

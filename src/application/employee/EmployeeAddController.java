@@ -42,19 +42,15 @@ public class EmployeeAddController implements Initializable {
 
     public void add() {
         Employee employee = new Employee(codeText.getText(), nameText.getText(), addressText.getText(), idNumberText.getText(), birthdayPicker.getValue(), (String) accessTypeCombo.getValue(), statusCheck.isSelected());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("System information");
         if (EmployeeManager.addNewEmployee(employee)) {
-            FileManager fileManager = new FileManager();
-            fileManager.write(PATH_EMPLOYEE,EmployeeManager.getEmployees());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("System information");
+            EmployeeManager.writeFile();
             alert.setContentText("Add new employee successfully.");
-            alert.showAndWait();
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("System information");
             alert.setContentText("The employee code can not be duplicated. Adding new employee was cancelled.");
-            alert.showAndWait();
         }
+        alert.showAndWait();
     }
 
     @Override

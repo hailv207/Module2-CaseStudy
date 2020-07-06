@@ -72,7 +72,6 @@ public class EmployeeEditController implements Initializable {
         String newIDNumber = idNumberText.getText();
         String newAccessType = (String) accessTypeCombo.getValue();
         boolean status = statusCheck.isSelected();
-        FileManager fileManager = new FileManager();
         Employee employee = EmployeeManager.getEmployeeByCode(code);
         employee.setName(newName);
         employee.setStatus(status);
@@ -80,7 +79,7 @@ public class EmployeeEditController implements Initializable {
         employee.setAddress(newAddress);
         employee.setBirthday(newBirthday);
         employee.setIdNumber(newIDNumber);
-        fileManager.write("src/application/employee/data/employees.dat", EmployeeManager.getEmployees());
+        EmployeeManager.writeFile();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("System information");
         alert.setContentText("Save employee successfully.");
@@ -96,6 +95,7 @@ public class EmployeeEditController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("System information");
         if (isDone) {
+            EmployeeManager.writeFile();
             alert.setContentText("Reset password successfully.");
         }else{
             alert.setContentText("You has entered wrong password. Resetting was cancelled.");
