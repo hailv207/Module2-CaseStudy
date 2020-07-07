@@ -131,14 +131,14 @@ public class MenuController implements Initializable {
             return;
         }
         for (int i = 0; i < OrderManager.getOrderList().size(); i++) {
-            if (OrderManager.getOrderList().get(i).getTableNumber().equals(tableNumber)){
-               if (OrderManager.getOrderList().get(i).isOrderStatus()){
-                   Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                   alert.setTitle("System information");
-                   alert.setContentText("Table number you entered is serving.");
-                   alert.showAndWait();
-                   return;
-               }
+            if (OrderManager.getOrderList().get(i).getTableNumber().equals(tableNumber)) {
+                if (OrderManager.getOrderList().get(i).isOrderStatus()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("System information");
+                    alert.setContentText("Table number you entered is serving.");
+                    alert.showAndWait();
+                    return;
+                }
             }
         }
         newOrder.setTableNumber(tableNumber);

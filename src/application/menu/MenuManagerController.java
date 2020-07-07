@@ -44,6 +44,7 @@ public class MenuManagerController implements Initializable {
         menuTable.getItems().clear();
         menuTable.getItems().addAll(MenuManager.getMenuList());
     }
+
     public void newMenu(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
@@ -54,7 +55,8 @@ public class MenuManagerController implements Initializable {
         stage.setScene(scene);
         stage.centerOnScreen();
     }
-    public void editMenu(ActionEvent event){
+
+    public void editMenu(ActionEvent event) {
 
     }
 

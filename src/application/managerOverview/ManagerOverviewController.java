@@ -34,16 +34,17 @@ public class ManagerOverviewController implements Initializable {
     Label welcomeLabel;
 
 
-public void changeSceneEmployeeManager(ActionEvent event) throws IOException {
-    Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(App.getResource("employee/EmployeeManagerScene.fxml"));
-    Parent employeeManagerView = loader.load();
-    Scene scene = new Scene(employeeManagerView);
-    stage.setTitle("Employee manager");
-    stage.setScene(scene);
-    stage.centerOnScreen();
-}
+    public void changeSceneEmployeeManager(ActionEvent event) throws IOException {
+        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(App.getResource("employee/EmployeeManagerScene.fxml"));
+        Parent employeeManagerView = loader.load();
+        Scene scene = new Scene(employeeManagerView);
+        stage.setTitle("Employee manager");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+    }
+
     public void changeSceneMaterialManager(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
@@ -54,6 +55,7 @@ public void changeSceneEmployeeManager(ActionEvent event) throws IOException {
         stage.setScene(scene);
         stage.centerOnScreen();
     }
+
     public void changeSceneStockManager(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
@@ -64,6 +66,7 @@ public void changeSceneEmployeeManager(ActionEvent event) throws IOException {
         stage.setScene(scene);
         stage.centerOnScreen();
     }
+
     public void changeSceneMenuManager(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
@@ -77,9 +80,9 @@ public void changeSceneEmployeeManager(ActionEvent event) throws IOException {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    welcomeLabel.setText("Have a nice day, " + currentUser);
-    welcomeLabel.setAlignment(CENTER);
-    timeLabel.setAlignment(CENTER);
+        welcomeLabel.setText("Have a nice day, " + currentUser);
+        welcomeLabel.setAlignment(CENTER);
+        timeLabel.setAlignment(CENTER);
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy | hh:mm:ss");
             timeLabel.setText(LocalDateTime.now().format(formatter));
