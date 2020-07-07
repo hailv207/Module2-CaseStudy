@@ -1,12 +1,14 @@
 package application.material;
 
-public class MaterialType {
+import java.io.Serializable;
+
+public class MaterialType implements Serializable {
     private String materialCode;
     private String materialName;
     private String materialSupplier;
     private boolean materialStatus;
     private String materialUnit;
-    private long materialInStock = 0;
+    private long materialInStock;
 
     public MaterialType(String materialCode, String materialName, String materialSupplier, boolean materialStatus, String materialUnit) {
         this.materialCode = materialCode;
@@ -36,8 +38,8 @@ public class MaterialType {
         this.materialStatus = materialStatus;
     }
 
-    public static void setMaterialInStock(long materialInStock) {
-        materialInStock = materialInStock;
+    public void setMaterialInStock(long materialInStock) {
+        this.materialInStock = materialInStock;
     }
 
     public String getMaterialCode() {
@@ -64,17 +66,19 @@ public class MaterialType {
         this.materialUnit = materialUnit;
     }
 
-    public  long getMaterialInStock() {
+    public long getMaterialInStock() {
         return materialInStock;
     }
 
-    public  void addMaterialInStock(long value) {
+    public void addMaterialInStock(long value) {
         materialInStock += value;
     }
 
-    public  void subMaterialInStock(long value) {
-            materialInStock -= value;
+    public void subMaterialInStock(long value) {
+        materialInStock -= value;
     }
+
+
 
     @Override
     public String toString() {

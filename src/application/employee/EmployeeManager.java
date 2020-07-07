@@ -2,8 +2,12 @@ package application.employee;
 
 import application.App;
 import application.filemanager.FileManager;
+import application.library.PasswordDialog;
+import javafx.scene.control.Alert;
 
 import java.util.*;
+
+import static application.App.currentUser;
 
 public abstract class EmployeeManager {
     private static List<Employee> employees = new ArrayList<>();
@@ -55,5 +59,39 @@ public static boolean writeFile(){
     fileManager.write(App.PATH_EMPLOYEE, employees);
     return true;
 }
-
+    public static void changePassword() {
+        PasswordDialog dialog = new PasswordDialog();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("System information");
+        dialog.setTitle("Confirm password");
+        dialog.setContentText("Please enter your current password");
+        Optional<String> currentPassword = dialog.showAndWait();
+        if (!currentPassword.isPresent()){
+            return;
+        }
+        if (EmployeeManager.getEmployeeByCode(currentUser).getAuthorized(currentUser, currentPassword.get())) {
+            dialog.setTitle("New password");
+            dialog.setContentText("Please enter your new password");
+            dialog.getPasswordField().clear();
+            Optional<String> newPassword = dialog.showAndWait();
+            dialog.setTitle("Confirm new password");
+            dialog.setContentText("Please confirm your new password");
+            dialog.getPasswordField().clear();
+            Optional<String> confirmNewPassword = dialog.showAndWait();
+            if (newPassword.get().equals(confirmNewPassword.get())){
+                boolean isDone = EmployeeManager.getEmployeeByCode(currentUser).changePassword(currentUser,currentPassword.get(),confirmNewPassword.get());
+                if (isDone) {
+                    EmployeeManager.writeFile();
+                    alert.setContentText("Change password successfully");
+                }   else{
+                    alert.setContentText("Change password failed");
+                }
+            }else{
+                alert.setContentText("Your new password was not confirmed. Please try again.");
+            }
+        }else{
+            alert.setContentText("You entered wrong password");
+        }
+        alert.showAndWait();
+    }
 }

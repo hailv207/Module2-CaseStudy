@@ -16,7 +16,7 @@ public class FileManager<T> {
             output.close();
             out.close();
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
     }
 
@@ -33,7 +33,7 @@ public class FileManager<T> {
             fis.close();
             ois.close();
         } catch (Exception e){
-            System.out.println("");
+            System.out.println(e.getMessage());
         }
         return resultList;
     }

@@ -7,6 +7,7 @@ import application.material.MaterialManager;
 import application.menu.MenuManager;
 import application.order.Order;
 import application.order.OrderManager;
+import application.stockmanager.StockInReceipt;
 import application.stockmanager.StockInReceiptManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -30,22 +33,24 @@ public class LoginController {
         String pass = password.getText();
         EmployeeManager.readFile();
         Employee employee = EmployeeManager.getEmployeeByCode(user);
-
+        System.out.println(employee);
         try{
             if (employee.getAuthorized(user, pass)){
                 MenuManager.readFile();
                 MaterialManager.readFile();
                 StockInReceiptManager.readFile();
+                OrderManager.readFile();
+                App.currentUser = user;
+                FileReader fr = new FileReader(App.PATH_RECEIPTCOUNTER);
+                Long value = Long.valueOf(fr.read());
+               StockInReceipt.setStockInReceiptCounter(value);
                 String accessType = employee.getAccessType();
                 try {
                     FXMLLoader loader = new FXMLLoader();
                     if (accessType.equals("staff")){
-                        FileManager<Order> fileManager = new FileManager<>();
-                        for (Order o: fileManager.read(App.PATH_ORDER) ){
-                            OrderManager.add(o);
-                        }
                         loader.setLocation(App.getResource("order/order.fxml"));
                     } else if (accessType.equals("manager")){
+
                         loader.setLocation(App.getResource("managerOverview/ManagerOverviewScene.fxml"));
                     }
                     Parent menuParent = null;
@@ -58,7 +63,6 @@ public class LoginController {
                     App.stage.setTitle("Menu");
                     App.stage.setScene(scene);
                     App.stage.centerOnScreen();
-                    App.currentUser = user;
                 } catch (Exception e){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("System information");

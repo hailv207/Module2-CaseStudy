@@ -53,7 +53,7 @@ public class MenuController implements Initializable {
         orderItemName.setCellValueFactory(new PropertyValueFactory<OrderItem, String>("orderItemName"));
         orderQuantityCol.setCellValueFactory(new PropertyValueFactory<OrderItem, Integer>("orderItemQuantity"));
         menuView.getItems().clear();
-        menuView.getItems().addAll(MenuManager.getMenuList());
+        loadMenuItems();
 
     }
 
@@ -144,8 +144,18 @@ public class MenuController implements Initializable {
         newOrder.setTableNumber(tableNumber);
         newOrder.calculateTotal();
         OrderManager.add(newOrder);
+        OrderManager.writeFile();
         cancelOrder();
 
+    }
+
+    public void loadMenuItems() {
+        menuView.getItems().clear();
+        for (MenuItem m : MenuManager.getMenuList()) {
+            if (m.isStatus()) {
+                menuView.getItems().add(m);
+            }
+        }
     }
 
 }

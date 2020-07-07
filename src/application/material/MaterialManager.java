@@ -1,5 +1,6 @@
 package application.material;
 
+import application.App;
 import application.filemanager.FileManager;
 
 import java.util.*;
@@ -31,16 +32,13 @@ public abstract class MaterialManager {
 
     public static boolean readFile() {
         FileManager<MaterialType> fileManager = new FileManager();
-        List<MaterialType> list = fileManager.read("src/application/material/data/materials.dat");
-        for (MaterialType material : list) {
-            materialList.add(material);
-        }
+        materialList.addAll(fileManager.read(App.PATH_MATERIALS));
         return true;
     }
 
     public static boolean writeFile() {
         FileManager<MaterialType> fileManager = new FileManager();
-        fileManager.write("src/application/material/data/materials.dat", materialList);
+        fileManager.write(App.PATH_MATERIALS, materialList);
         return true;
     }
 }
