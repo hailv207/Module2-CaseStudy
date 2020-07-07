@@ -40,6 +40,8 @@ public class NewStockInReceiptController implements Initializable {
 
     @FXML
     TextField stockInReceiptContentText;
+    @FXML
+    TextField searchMaterialText;
 
     StockInReceipt newStockInReceipt;
 
@@ -62,6 +64,9 @@ public class NewStockInReceiptController implements Initializable {
         stockInItemQuantityCol.setCellValueFactory(new PropertyValueFactory<StockInItem, Long>("quantity"));
         stockInItemTotalCol.setCellValueFactory(new PropertyValueFactory<StockInItem, Long>("totalPayment"));
         stockInItemTable.getItems().addAll(newStockInReceipt.getStockInItemList());
+        searchMaterialText.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchMaterial();
+        });
     }
 
     public void save() throws IOException {
@@ -92,8 +97,8 @@ public class NewStockInReceiptController implements Initializable {
     public void addStockInItem() {
         MaterialType material = materialTable.getSelectionModel().getSelectedItem();
         if (material != null) {
-            for (StockInItem s: newStockInReceipt.getStockInItemList()){
-                if (s.getMaterial().getMaterialCode().equals(material.getMaterialCode())){
+            for (StockInItem s : newStockInReceipt.getStockInItemList()) {
+                if (s.getMaterial().getMaterialCode().equals(material.getMaterialCode())) {
                     return;
                 }
             }
@@ -135,7 +140,8 @@ public class NewStockInReceiptController implements Initializable {
         stockInItemTable.getItems().clear();
         stockInItemTable.getItems().addAll(newStockInReceipt.getStockInItemList());
     }
-    public void editStockInItem(){
+
+    public void editStockInItem() {
         StockInItem selectedItem = stockInItemTable.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             TextInputDialog dialog = new TextInputDialog();
@@ -151,5 +157,10 @@ public class NewStockInReceiptController implements Initializable {
             selectedItem.setTotalPayment(totalPayment);
             refreshStockInItemList();
         }
+    }
+    public void searchMaterial(){
+        String searchKey = searchMaterialText.getText();
+        materialTable.getItems().clear();
+        materialTable.getItems().addAll(MaterialManager.searchMaterialByName(searchKey, true));
     }
 }

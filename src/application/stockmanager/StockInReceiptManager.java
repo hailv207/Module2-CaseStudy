@@ -2,10 +2,11 @@ package application.stockmanager;
 
 import application.App;
 import application.filemanager.FileManager;
+import application.library.MyUtil;
 import application.material.MaterialManager;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,5 +51,24 @@ public abstract class StockInReceiptManager {
         FileManager<StockInReceipt> fileManager = new FileManager<>();
         fileManager.write(App.PATH_STOCKINRECEIPT, stockInReceiptList);
         return true;
+    }
+
+    public static List<StockInReceipt> searchStockInReceipt(String content, LocalDate date) {
+        List<StockInReceipt> list = new ArrayList<>();
+        for (StockInReceipt s : stockInReceiptList) {
+            if (s.getStockInContent().toLowerCase().contains(content.toLowerCase()) && MyUtil.isSameDate(s.getStockInDate(),date)) {
+                list.add(s);
+            }
+        }
+        return list;
+    }
+    public static List<StockInReceipt> searchStockInReceipt(String content) {
+        List<StockInReceipt> list = new ArrayList<>();
+        for (StockInReceipt s : stockInReceiptList) {
+            if (s.getStockInContent().toLowerCase().contains(content.toLowerCase())) {
+                list.add(s);
+            }
+        }
+        return list;
     }
 }

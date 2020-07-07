@@ -40,6 +40,8 @@ public class MaterialManagerController implements Initializable {
     TableColumn<MaterialType, Boolean> materialStatusCol;
     @FXML
     TableColumn<MaterialType, Integer> materialInStockCol;
+    @FXML
+    TextField searchMaterialText;
 
 
     @Override
@@ -47,11 +49,20 @@ public class MaterialManagerController implements Initializable {
         materialCodeCol.setCellValueFactory(new PropertyValueFactory<MaterialType, String>("materialCode"));
         materialNameCol.setCellValueFactory(new PropertyValueFactory<MaterialType, String>("materialName"));
         materialSupplierCol.setCellValueFactory(new PropertyValueFactory<MaterialType, String>("materialSupplier"));
-        materialUnitCol.setCellValueFactory(new PropertyValueFactory<MaterialType,String>("materialUnit"));
+        materialUnitCol.setCellValueFactory(new PropertyValueFactory<MaterialType, String>("materialUnit"));
         materialStatusCol.setCellValueFactory(new PropertyValueFactory<MaterialType, Boolean>("materialStatus"));
         materialInStockCol.setCellValueFactory(new PropertyValueFactory<MaterialType, Integer>("materialInStock"));
         materialTable.getItems().addAll(MaterialManager.getMaterialList());
+        searchMaterialText.textProperty().addListener((o, old, newValue) ->{
+            searchMaterialByName();
+        });
     }
+    public void searchMaterialByName(){
+        String searchKey = searchMaterialText.getText();
+        materialTable.getItems().clear();
+        materialTable.getItems().addAll(MaterialManager.searchMaterialByName(searchKey));
+    }
+
     public void addNewMaterial(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
@@ -62,9 +73,10 @@ public class MaterialManagerController implements Initializable {
         stage.setScene(scene);
         stage.centerOnScreen();
     }
+
     public void editMaterial(ActionEvent event) throws IOException {
         MaterialType material = materialTable.getSelectionModel().getSelectedItem();
-        if (material != null){
+        if (material != null) {
             Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("EditMaterialScene.fxml"));
@@ -76,13 +88,14 @@ public class MaterialManagerController implements Initializable {
             controller.setMaterial(material);
             stage.setScene(scene);
             stage.centerOnScreen();
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("System information");
             alert.setContentText("No material type was selected.");
             alert.showAndWait();
         }
     }
+
     public void cancel(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
@@ -93,6 +106,7 @@ public class MaterialManagerController implements Initializable {
         stage.setScene(scene);
         stage.centerOnScreen();
     }
+
     public void changePassword() {
         PasswordDialog dialog = new PasswordDialog();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -100,7 +114,7 @@ public class MaterialManagerController implements Initializable {
         dialog.setTitle("Confirm password");
         dialog.setContentText("Please enter your current password");
         Optional<String> currentPassword = dialog.showAndWait();
-        if (!currentPassword.isPresent()){
+        if (!currentPassword.isPresent()) {
             return;
         }
         if (EmployeeManager.getEmployeeByCode(currentUser).getAuthorized(currentUser, currentPassword.get())) {
@@ -112,18 +126,18 @@ public class MaterialManagerController implements Initializable {
             dialog.setContentText("Please confirm your new password");
             dialog.getPasswordField().clear();
             Optional<String> confirmNewPassword = dialog.showAndWait();
-            if (newPassword.get().equals(confirmNewPassword.get())){
-                boolean isDone = EmployeeManager.getEmployeeByCode(currentUser).changePassword(currentUser,currentPassword.get(),confirmNewPassword.get());
+            if (newPassword.get().equals(confirmNewPassword.get())) {
+                boolean isDone = EmployeeManager.getEmployeeByCode(currentUser).changePassword(currentUser, currentPassword.get(), confirmNewPassword.get());
                 if (isDone) {
                     EmployeeManager.writeFile();
                     alert.setContentText("Change password successfully");
-                }   else{
+                } else {
                     alert.setContentText("Change password failed");
                 }
-            }else{
+            } else {
                 alert.setContentText("Your new password was not confirmed. Please try again.");
             }
-        }else{
+        } else {
             alert.setContentText("You entered wrong password");
         }
         alert.showAndWait();

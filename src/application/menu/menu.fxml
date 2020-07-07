@@ -63,8 +63,8 @@
    <top>
       <AnchorPane prefHeight="44.0" prefWidth="1061.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="31.0" layoutY="10.0" mnemonicParsing="false" text="Button" />
             <TextField fx:id="tableNumberText" layoutX="594.0" layoutY="10.0" promptText="Table number" />
+            <TextField fx:id="searchMenuText" layoutY="10.0" prefHeight="27.0" prefWidth="335.0" promptText="Type to search menu by name" />
          </children>
       </AnchorPane>
    </top>

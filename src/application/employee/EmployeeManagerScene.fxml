@@ -33,7 +33,7 @@
    <top>
       <AnchorPane prefHeight="27.0" prefWidth="1131.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="searchEmployeeByNameText" prefHeight="27.0" prefWidth="470.0" promptText="Type to search employee by name" />
+            <TextField fx:id="searchEmployeeByNameText" layoutX="103.0" prefHeight="27.0" prefWidth="233.0" promptText="Type to search employee by name" />
          </children>
       </AnchorPane>
    </top>

@@ -28,7 +28,7 @@
             <Label layoutX="19.0" layoutY="16.0" prefHeight="25.0" prefWidth="119.0" text="Content" />
             <Button layoutX="43.0" layoutY="516.0" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="103.0" text="Save" />
             <Button layoutX="215.0" layoutY="516.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="103.0" text="Cancel" />
-            <TextField fx:id="materialSearchText" layoutX="13.0" layoutY="52.0" prefHeight="27.0" prefWidth="268.0" />
+            <TextField fx:id="searchMaterialText" layoutX="13.0" layoutY="52.0" prefHeight="27.0" prefWidth="268.0" promptText="Type to search material by name" />
             <Button layoutX="860.0" layoutY="516.0" mnemonicParsing="false" onAction="#removeStockInItem" prefHeight="27.0" prefWidth="131.0" text="Remove item" />
          </children>
       </AnchorPane>

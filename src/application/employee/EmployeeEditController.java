@@ -90,10 +90,16 @@ public class EmployeeEditController implements Initializable {
         String code = codeText.getText();
         PasswordDialog passwordInputDialog = new PasswordDialog();
         Optional<String> inputResult = passwordInputDialog.showAndWait();
-        boolean isDone = EmployeeManager.getEmployeeByCode(code).resetPassword(App.currentUser, inputResult.get());
-        System.out.println(inputResult.toString());
+        Employee e = EmployeeManager.getEmployeeByCode(code);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("System information");
+        if (e.getAccessType().equals("admin")){
+            alert.setContentText("System can not reset admin's password");
+            return;
+        }
+        boolean isDone = e.resetPassword(App.currentUser, inputResult.get());
+        System.out.println(inputResult.toString());
+
         if (isDone) {
             EmployeeManager.writeFile();
             alert.setContentText("Reset password successfully.");

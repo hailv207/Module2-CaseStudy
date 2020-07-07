@@ -32,7 +32,7 @@ public class MenuManagerController implements Initializable {
     TableColumn<MenuItem, Boolean> menuStatusCol;
 
     @FXML
-    TextField searchByNameText;
+    TextField searchMenuText;
 
 
     @Override
@@ -44,6 +44,9 @@ public class MenuManagerController implements Initializable {
         menuStatusCol.setCellValueFactory(new PropertyValueFactory<MenuItem, Boolean>("status"));
         menuTable.getItems().clear();
         menuTable.getItems().addAll(MenuManager.getMenuList());
+        searchMenuText.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchMenuByName();
+        });
     }
 
     public void newMenu(ActionEvent event) throws IOException {
@@ -85,4 +88,9 @@ public class MenuManagerController implements Initializable {
         stage.centerOnScreen();
     }
 
+    public void searchMenuByName() {
+        String searchKey = searchMenuText.getText();
+        menuTable.getItems().clear();
+        menuTable.getItems().addAll(MenuManager.searchMenuItemByName(searchKey));
+    }
 }

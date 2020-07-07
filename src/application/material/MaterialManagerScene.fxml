@@ -29,7 +29,7 @@
    <top>
       <AnchorPane prefHeight="29.0" prefWidth="985.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="searchText" layoutY="1.0" prefHeight="27.0" prefWidth="445.0" promptText="Type to search material by name" />
+            <TextField fx:id="searchMaterialText" layoutX="185.0" layoutY="1.0" prefHeight="27.0" prefWidth="260.0" promptText="Type to search material by name" />
          </children>
       </AnchorPane>
    </top>

@@ -49,6 +49,9 @@ public class AddNewMenuController implements Initializable {
     @FXML
     TableColumn<MenuMaterialItem, Long> materialItemQuantityCol;
 
+    @FXML
+    TextField searchMaterialText;
+
     MenuItem menuItem = new MenuItem();
 
     @Override
@@ -62,7 +65,10 @@ public class AddNewMenuController implements Initializable {
         materialItemQuantityCol.setCellValueFactory(new PropertyValueFactory<MenuMaterialItem, Long>("quantity"));
         materialItemTable.getItems().clear();
         menuStatusCheck.setSelected(true);
-        loadMaterial();
+        searchMaterialText.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchMaterialByName();
+        });
+
     }
 
     public void addMenuMaterialItem() {
@@ -158,6 +164,11 @@ public class AddNewMenuController implements Initializable {
                 materialTable.getItems().add(m);
             }
         }
+    }
+    public void searchMaterialByName(){
+        String searchKey = searchMaterialText.getText();
+        materialTable.getItems().clear();
+        materialTable.getItems().addAll(MaterialManager.searchMaterialByName(searchKey,true));
     }
 
 }

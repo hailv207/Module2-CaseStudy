@@ -29,7 +29,7 @@
             <TableColumn fx:id="materialItemQuantityCol" prefWidth="100.0" text="Quantity" />
          </columns>
       </TableView>
-      <TextField layoutX="22.0" layoutY="231.0" prefHeight="27.0" prefWidth="346.0" />
+      <TextField fx:id="searchMaterialText" layoutX="22.0" layoutY="231.0" prefHeight="27.0" prefWidth="346.0" promptText="Type to search material by name" />
       <Button layoutX="811.0" layoutY="152.0" mnemonicParsing="false" onAction="#add" prefHeight="27.0" prefWidth="146.0" text="Add" />
       <Button layoutX="811.0" layoutY="195.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="146.0" text="Cancel" />
       <CheckBox fx:id="menuStatusCheck" layoutX="134.0" layoutY="186.0" mnemonicParsing="false" />

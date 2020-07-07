@@ -41,4 +41,25 @@ public abstract class MaterialManager {
         fileManager.write(App.PATH_MATERIALS, materialList);
         return true;
     }
+
+    public static List<MaterialType> searchMaterialByName(String searchKey) {
+        List<MaterialType> list = new ArrayList<>();
+        for (MaterialType m : materialList) {
+            if (m.getMaterialName().toLowerCase().contains(searchKey.toLowerCase())) {
+                list.add(m);
+            }
+        }
+        return list;
+    }
+
+    public static List<MaterialType> searchMaterialByName(String searchKey, boolean status) {
+        List<MaterialType> list = new ArrayList<>();
+        for (MaterialType m : materialList) {
+            if (m.getMaterialName().toLowerCase().contains(searchKey.toLowerCase()) && m.getMaterialStatus() == status) {
+                list.add(m);
+            }
+        }
+        return list;
+    }
+
 }

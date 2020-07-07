@@ -41,6 +41,8 @@ public class MenuController implements Initializable {
     TableColumn<OrderItem, Integer> orderQuantityCol;
     @FXML
     TextField tableNumberText;
+    @FXML
+    TextField searchMenuText;
 
     Order newOrder = new Order();
 
@@ -52,9 +54,10 @@ public class MenuController implements Initializable {
 
         orderItemName.setCellValueFactory(new PropertyValueFactory<OrderItem, String>("orderItemName"));
         orderQuantityCol.setCellValueFactory(new PropertyValueFactory<OrderItem, Integer>("orderItemQuantity"));
-        menuView.getItems().clear();
         loadMenuItems();
-
+        searchMenuText.textProperty().addListener(((observable, oldValue, newValue) -> {
+            searchMenuByName();
+        }));
     }
 
     public void loadOrderItem() {
@@ -156,6 +159,14 @@ public class MenuController implements Initializable {
                 menuView.getItems().add(m);
             }
         }
+    }
+
+    public void searchMenuByName() {
+        String searchKey = searchMenuText.getText();
+        menuView.getItems().clear();
+        menuView.getItems().addAll(MenuManager.searchMenuItemByName(searchKey, true));
+
+
     }
 
 }

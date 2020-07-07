@@ -2,6 +2,7 @@ package application.stockmanager;
 
 import application.App;
 import application.employee.EmployeeManager;
+import application.library.MyUtil;
 import application.library.PasswordDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +35,11 @@ public class StockInReceiptManagerController implements Initializable {
     @FXML
     TableColumn<StockInReceipt, Long> stockInReceiptTotalCol;
 
+    @FXML
+    DatePicker datePicker;
+    @FXML
+    TextField contentText;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         stockInReceiptCodeCol.setCellValueFactory(new PropertyValueFactory<StockInReceipt, String>("stockInReceiptCode"));
@@ -42,14 +48,20 @@ public class StockInReceiptManagerController implements Initializable {
         stockInReceiptContentCol.setCellValueFactory(new PropertyValueFactory<StockInReceipt, String>("stockInContent"));
         stockInReceiptTotalCol.setCellValueFactory(new PropertyValueFactory<StockInReceipt, Long>("totalPayment"));
         stockInReceiptTable.getItems().addAll(StockInReceiptManager.getStockInReceiptList());
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            searchStockInReceipt();
+        });
+        contentText.textProperty().addListener((observable, oldValue, newValue) ->{
+            searchStockInReceipt();
+        });
     }
 
     public void newStockInReceipt(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(App.getResource("stockmanager/NewStockInReceiptScene.fxml"));
-        Parent employeeAddView = loader.load();
-        Scene scene = new Scene(employeeAddView);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
         stage.setTitle("New stock in receipt");
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -92,6 +104,15 @@ public class StockInReceiptManagerController implements Initializable {
     public void refreshStockInReceiptTable(){
         stockInReceiptTable.getItems().clear();
         stockInReceiptTable.getItems().addAll(StockInReceiptManager.getStockInReceiptList());
+    }
+    public void searchStockInReceipt(){
+        LocalDate date = datePicker.getValue();
+        String content = contentText.getText();
+        stockInReceiptTable.getItems().clear();
+        if (date == null) {
+            stockInReceiptTable.getItems().addAll(StockInReceiptManager.searchStockInReceipt(content));
+        }
+        stockInReceiptTable.getItems().addAll(StockInReceiptManager.searchStockInReceipt(content, date));
     }
 
 }

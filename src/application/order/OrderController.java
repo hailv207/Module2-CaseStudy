@@ -19,10 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -59,6 +56,10 @@ public class OrderController implements Initializable {
     Label welcomeLabel;
     @FXML
     Label timeLabel;
+    @FXML
+    TextField tableNumberText;
+    @FXML
+    DatePicker datePicker;
 
     Order order = new Order();
 
@@ -78,6 +79,14 @@ public class OrderController implements Initializable {
         orderDateCol.setCellValueFactory(new PropertyValueFactory<Order, LocalDate>("orderDate"));
         orderTable.getItems().clear();
         loadOrder();
+        datePicker.setValue(LocalDate.now());
+        tableNumberText.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchOrder();
+        });
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            searchOrder();
+        });
+
     }
 
 
@@ -182,4 +191,14 @@ public class OrderController implements Initializable {
         MaterialManager.writeFile();
     }
 
+    public void searchOrder() {
+        String tableNumber = tableNumberText.getText();
+        LocalDate date = datePicker.getValue();
+        orderTable.getItems().clear();
+        if (date == null){
+            orderTable.getItems().addAll(OrderManager.searchOrder(tableNumber));
+        }
+        orderTable.getItems().addAll(OrderManager.searchOrder(tableNumber,date));
+
+    }
 }
