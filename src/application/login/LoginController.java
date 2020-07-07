@@ -40,6 +40,7 @@ public class LoginController {
                 MaterialManager.readFile();
                 StockInReceiptManager.readFile();
                 OrderManager.readFile();
+                App.currentUser = user;
                 FileReader fr = new FileReader(App.PATH_RECEIPTCOUNTER);
                 Long value = Long.valueOf(fr.read());
                StockInReceipt.setStockInReceiptCounter(value);
@@ -62,7 +63,6 @@ public class LoginController {
                     App.stage.setTitle("Menu");
                     App.stage.setScene(scene);
                     App.stage.centerOnScreen();
-                    App.currentUser = user;
                 } catch (Exception e){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("System information");
