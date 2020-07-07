@@ -30,9 +30,12 @@ public class LoginController {
         String pass = password.getText();
         EmployeeManager.readFile();
         Employee employee = EmployeeManager.getEmployeeByCode(user);
-        System.out.println(employee);
+
         try{
             if (employee.getAuthorized(user, pass)){
+                MenuManager.readFile();
+                MaterialManager.readFile();
+                StockInReceiptManager.readFile();
                 String accessType = employee.getAccessType();
                 try {
                     FXMLLoader loader = new FXMLLoader();
@@ -43,9 +46,6 @@ public class LoginController {
                         }
                         loader.setLocation(App.getResource("order/order.fxml"));
                     } else if (accessType.equals("manager")){
-                        MenuManager.readFile();
-                        MaterialManager.readFile();
-                        StockInReceiptManager.readFile();
                         loader.setLocation(App.getResource("managerOverview/ManagerOverviewScene.fxml"));
                     }
                     Parent menuParent = null;

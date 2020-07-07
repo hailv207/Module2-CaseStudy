@@ -38,8 +38,6 @@ public class OrderController implements Initializable {
     @FXML
     TableColumn<Order, String> orderTotalCol;
 
-    Order order = new Order();
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

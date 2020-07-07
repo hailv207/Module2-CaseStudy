@@ -66,16 +66,17 @@ public class MenuItem extends MenuManager implements Serializable {
     }
 
     public boolean addNewMaterial(MenuMaterialItem item) {
-        for (MenuMaterialItem m: materialList){
-            if (m.getMenuMaterialType().getMaterialCode().equals(item.getMenuMaterialType().getMaterialCode())){
+        for (MenuMaterialItem m : materialList) {
+            if (m.getMenuMaterialType().getMaterialCode().equals(item.getMenuMaterialType().getMaterialCode())) {
                 return false;
             }
         }
         return materialList.add(item);
     }
+
     public boolean deleteMaterial(MenuMaterialItem item) {
-        for (MenuMaterialItem m: materialList){
-            if (m.getMenuMaterialType().getMaterialCode().equals(item.getMenuMaterialType().getMaterialCode())){
+        for (MenuMaterialItem m : materialList) {
+            if (m.getMenuMaterialType().getMaterialCode().equals(item.getMenuMaterialType().getMaterialCode())) {
                 return materialList.remove(m);
             }
         }
