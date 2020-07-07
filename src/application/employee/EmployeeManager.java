@@ -54,6 +54,7 @@ public static boolean readFile(){
     }
     return true;
 }
+
 public static boolean writeFile(){
     FileManager<Employee> fileManager = new FileManager<>();
     fileManager.write(App.PATH_EMPLOYEE, employees);
@@ -93,5 +94,14 @@ public static boolean writeFile(){
             alert.setContentText("You entered wrong password");
         }
         alert.showAndWait();
+    }
+    public static List<Employee> searchEmployeeByName(String searchKey){
+        List<Employee> result = new ArrayList<>();
+        for (Employee e:employees){
+            if (e.getName().toLowerCase().contains(searchKey.toLowerCase())){
+                result.add(e);
+            }
+        }
+        return result;
     }
 }

@@ -24,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import static application.App.PATH_EMPLOYEE;
+import static application.App.currentUser;
 
 public class EmployeeManagerController implements Initializable {
     List<Employee> list = new ArrayList<Employee>();
@@ -45,6 +46,10 @@ public class EmployeeManagerController implements Initializable {
     @FXML
     private TableColumn<Employee, Boolean> statusColumn;
 
+    @FXML
+    TextField searchEmployeeByNameText;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         codeColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("code"));
@@ -55,11 +60,19 @@ public class EmployeeManagerController implements Initializable {
         accessTypeColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("accessType"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<Employee, Boolean>("status"));
         table.getItems().addAll(EmployeeManager.getEmployees());
+        searchEmployeeByNameText.textProperty().addListener((o, old, newValue) ->{
+            searchEmployeeByName();
+        });
     }
 
 
     public void changeSceneEditEmployee(ActionEvent event) throws IOException {
-        if (table.getSelectionModel().getSelectedItem() != null){
+        Employee e = table.getSelectionModel().getSelectedItem();
+
+        if (e.getCode().equals(currentUser) || e.getAccessType().equals("admin")) {
+            return;
+        }
+        if (e != null) {
             Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("EmployeeEditScene.fxml"));
@@ -72,7 +85,7 @@ public class EmployeeManagerController implements Initializable {
             controller.setEmployee(employee);
             stage.setScene(scene);
             stage.centerOnScreen();
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("System information");
             alert.setContentText("No employee was selected.");
@@ -94,6 +107,9 @@ public class EmployeeManagerController implements Initializable {
 
     public void deleteEmployee() {
         Employee employee = table.getSelectionModel().getSelectedItem();
+        if (employee.getCode().equals(currentUser) || employee.getAccessType().equals("admin")) {
+            return;
+        }
         if (employee == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("System information");
@@ -103,7 +119,7 @@ public class EmployeeManagerController implements Initializable {
         }
         PasswordDialog passwordInputDialog = new PasswordDialog();
         Optional<String> inputResult = passwordInputDialog.showAndWait();
-        boolean authorized = EmployeeManager.getEmployeeByCode(App.currentUser).getAuthorized(App.currentUser, inputResult.get());
+        boolean authorized = EmployeeManager.getEmployeeByCode(currentUser).getAuthorized(currentUser, inputResult.get());
         if (authorized) {
             if (EmployeeManager.deleteEmployee(EmployeeManager.getEmployeeByCode(employee.getCode()))) {
                 FileManager fileManager = new FileManager();
@@ -126,10 +142,12 @@ public class EmployeeManagerController implements Initializable {
         }
         reloadEmployees();
     }
-    public void reloadEmployees(){
+
+    public void reloadEmployees() {
         table.getItems().clear();
         table.getItems().addAll(EmployeeManager.getEmployees());
     }
+
     public void cancel(ActionEvent event) throws IOException {
         Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader();
@@ -139,5 +157,11 @@ public class EmployeeManagerController implements Initializable {
         stage.setTitle("Manager Overview");
         stage.setScene(scene);
         stage.centerOnScreen();
+    }
+
+    public void searchEmployeeByName(){
+        String searchKey = searchEmployeeByNameText.getText();
+        table.getItems().clear();
+        table.getItems().addAll(EmployeeManager.searchEmployeeByName(searchKey));
     }
 }
