@@ -44,7 +44,6 @@ public class LoginController {
             alert.showAndWait();
             return;
         }
-
         try {
             if (employee.getAuthorized(user, pass)) {
                 MenuManager.readFile();
