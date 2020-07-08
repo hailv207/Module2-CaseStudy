@@ -14,7 +14,7 @@
               <Button layoutX="27.0" layoutY="122.0" mnemonicParsing="false" onAction="#changeSceneMenuManager" prefHeight="27.0" prefWidth="226.0" text="Menu management" />
               <Button layoutX="27.0" layoutY="224.0" mnemonicParsing="false" onAction="#changeSceneStockManager" prefHeight="27.0" prefWidth="226.0" text="Stock management" />
               <Button layoutX="27.0" layoutY="172.0" mnemonicParsing="false" onAction="#changeSceneMaterialManager" prefHeight="27.0" prefWidth="226.0" text="Material management" />
-              <Button layoutX="27.0" layoutY="271.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="226.0" text="Report" />
+              <Button layoutX="27.0" layoutY="271.0" mnemonicParsing="false" onAction="#changeSceneReport" prefHeight="27.0" prefWidth="226.0" text="Report" />
             <Label fx:id="timeLabel" layoutX="27.0" layoutY="14.0" prefHeight="24.0" prefWidth="224.0" />
             <Label fx:id="welcomeLabel" layoutX="27.0" layoutY="38.0" onMouseClicked="#changePassword" prefHeight="24.0" prefWidth="224.0" />
           </children>

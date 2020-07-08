@@ -10,6 +10,7 @@ import application.stockmanager.StockInReceipt;
 import application.stockmanager.StockInReceiptManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -19,9 +20,11 @@ import javafx.scene.input.KeyEvent;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
     @FXML
     private TextField username;
     @FXML
@@ -35,7 +38,6 @@ public class LoginController {
             return;
         }
         EmployeeManager.readFile();
-        checkUsers();
         Employee employee = EmployeeManager.getEmployeeByCode(user);
         if (!employee.getStatus()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -104,5 +106,10 @@ public class LoginController {
             }
         }
         EmployeeManager.addNewEmployee(new Employee("admin", "admin", "", "", LocalDate.now(), "admin", true));
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        checkUsers();
     }
 }

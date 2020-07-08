@@ -2,6 +2,7 @@ package application.managerOverview;
 
 import application.App;
 import application.employee.EmployeeManager;
+import application.library.PasswordDialog;
 import application.material.MaterialManager;
 import application.menu.MenuManager;
 import application.stockmanager.StockInReceiptManager;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static application.App.currentUser;
@@ -91,7 +94,49 @@ public class ManagerOverviewController implements Initializable {
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
     }
+    public void changeSceneReport(ActionEvent event) throws IOException {
+        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(App.getResource("report/ReportScene.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setTitle("Report");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+    }
     public void changePassword(){
-        EmployeeManager.changePassword();
+        PasswordDialog dialog = new PasswordDialog();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("System information");
+        dialog.setTitle("Confirm password");
+        dialog.setContentText("Please enter your current password");
+        Optional<String> currentPassword = dialog.showAndWait();
+        if (!currentPassword.isPresent()){
+            return;
+        }
+        if (EmployeeManager.getEmployeeByCode(currentUser).getAuthorized(currentUser, currentPassword.get())) {
+            dialog.setTitle("New password");
+            dialog.setContentText("Please enter your new password");
+            dialog.getPasswordField().clear();
+            Optional<String> newPassword = dialog.showAndWait();
+            dialog.setTitle("Confirm new password");
+            dialog.setContentText("Please confirm your new password");
+            dialog.getPasswordField().clear();
+            Optional<String> confirmNewPassword = dialog.showAndWait();
+            if (newPassword.get().equals(confirmNewPassword.get())){
+                boolean isDone = EmployeeManager.getEmployeeByCode(currentUser).changePassword(currentUser,currentPassword.get(),confirmNewPassword.get());
+                if (isDone) {
+                    EmployeeManager.writeFile();
+                    alert.setContentText("Change password successfully");
+                }   else{
+                    alert.setContentText("Change password failed");
+                }
+            }else{
+                alert.setContentText("Your new password was not confirmed. Please try again.");
+            }
+        }else{
+            alert.setContentText("You entered wrong password");
+        }
+        alert.showAndWait();
     }
 }

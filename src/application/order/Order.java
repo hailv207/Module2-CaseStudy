@@ -58,6 +58,9 @@ public class Order implements Serializable {
         total = n.format(this.orderTotal);
         return total;
     }
+    public Long getLongOrderTotal(){
+        return orderTotal;
+    }
 
     public void setOderTotal(long orderTotal) {
         this.orderTotal = orderTotal;
