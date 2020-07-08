@@ -1,7 +1,6 @@
 package application.menu;
 
 import application.App;
-import application.filemanager.FileManager;
 import application.order.Order;
 import application.order.OrderItem;
 import application.order.OrderManager;
@@ -19,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 

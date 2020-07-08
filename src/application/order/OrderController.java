@@ -29,6 +29,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -77,8 +78,6 @@ public class OrderController implements Initializable {
         orderStatusCol.setCellValueFactory(new PropertyValueFactory<Order, Boolean>("orderStatus"));
         orderTotalCol.setCellValueFactory(new PropertyValueFactory<Order, String>("orderTotal"));
         orderDateCol.setCellValueFactory(new PropertyValueFactory<Order, LocalDate>("orderDate"));
-        orderTable.getItems().clear();
-        loadOrder();
         datePicker.setValue(LocalDate.now());
         tableNumberText.textProperty().addListener((observable, oldValue, newValue) -> {
             searchOrder();
@@ -86,15 +85,8 @@ public class OrderController implements Initializable {
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             searchOrder();
         });
-
+        searchOrder();
     }
-
-
-    public void loadOrder() {
-        orderTable.getItems().clear();
-        orderTable.getItems().addAll(OrderManager.getOrderList());
-    }
-
 
     public void createOrder() {
         FXMLLoader loader = new FXMLLoader();
@@ -121,7 +113,7 @@ public class OrderController implements Initializable {
             if (orderDelete != null) {
                 OrderManager.remove(orderDelete);
                 OrderManager.writeFile();
-                loadOrder();
+                searchOrder();
             }
         }
     }
@@ -131,14 +123,13 @@ public class OrderController implements Initializable {
         if (orderPayment != null) {
             orderPayment.payment();
             updateMaterialInStock(orderPayment);
-            orderPayment.setOrderStatus(false);
             OrderManager.writeFile();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Order payment");
             alert.setContentText("Total = " + orderPayment.getOrderTotal());
             alert.showAndWait();
             orderTable.getItems().clear();
-            loadOrder();
+            searchOrder();
         }
     }
 
@@ -181,7 +172,11 @@ public class OrderController implements Initializable {
 
     public void updateMaterialInStock(Order order) {
         for (OrderItem o : order.getOrderItemList()) {
-            for (MenuMaterialItem m : o.getOrderItem().getMaterialList()) {
+            List<MenuMaterialItem> list = o.getOrderItem().getMaterialList();
+            if (list == null) {
+                return;
+            }
+            for (MenuMaterialItem m : list) {
                 Long value = m.getQuantity() * o.getOrderItemQuantity();
                 String code = m.getMenuMaterialType().getMaterialCode();
                 MaterialType mi = MaterialManager.getMaterialByCode(code);
@@ -195,10 +190,10 @@ public class OrderController implements Initializable {
         String tableNumber = tableNumberText.getText();
         LocalDate date = datePicker.getValue();
         orderTable.getItems().clear();
-        if (date == null){
+        if (date == null) {
             orderTable.getItems().addAll(OrderManager.searchOrder(tableNumber));
         }
-        orderTable.getItems().addAll(OrderManager.searchOrder(tableNumber,date));
+        orderTable.getItems().addAll(OrderManager.searchOrder(tableNumber, date));
 
     }
 }

@@ -1,6 +1,5 @@
 package application.employee;
 
-import application.filemanager.FileManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +14,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
-import static application.App.PATH_EMPLOYEE;
 
 public class EmployeeAddController implements Initializable {
     @FXML

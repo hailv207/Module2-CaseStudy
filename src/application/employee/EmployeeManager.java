@@ -1,7 +1,7 @@
 package application.employee;
 
 import application.App;
-import application.filemanager.FileManager;
+import application.library.FileManager;
 import application.library.PasswordDialog;
 import javafx.scene.control.Alert;
 

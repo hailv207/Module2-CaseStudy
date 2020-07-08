@@ -1,8 +1,7 @@
 package application.menu;
 
 import application.App;
-import application.filemanager.FileManager;
-import application.material.MaterialType;
+import application.library.FileManager;
 
 import java.util.ArrayList;
 import java.util.List;

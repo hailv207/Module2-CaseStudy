@@ -3,10 +3,8 @@ package application.login;
 import application.App;
 import application.employee.Employee;
 import application.employee.EmployeeManager;
-import application.filemanager.FileManager;
 import application.material.MaterialManager;
 import application.menu.MenuManager;
-import application.order.Order;
 import application.order.OrderManager;
 import application.stockmanager.StockInReceipt;
 import application.stockmanager.StockInReceiptManager;
@@ -22,9 +20,6 @@ import javafx.scene.input.KeyEvent;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class LoginController {
     @FXML

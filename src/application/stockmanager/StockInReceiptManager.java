@@ -1,7 +1,7 @@
 package application.stockmanager;
 
 import application.App;
-import application.filemanager.FileManager;
+import application.library.FileManager;
 import application.library.MyUtil;
 import application.material.MaterialManager;
 

@@ -1,7 +1,7 @@
 package application.material;
 
 import application.App;
-import application.filemanager.FileManager;
+import application.library.FileManager;
 
 import java.util.*;
 
