@@ -15,7 +15,7 @@ public abstract class StockInReceiptManager {
 
     public static boolean addStockInReceipt(StockInReceipt s) throws IOException {
         for (StockInItem item : s.getStockInItemList()) {
-            item.getMaterial().addMaterialInStock(item.getQuantity());
+            item.getMaterial().addMaterialInStock(item.getLongQuantity());
         }
         MaterialManager.writeFile();
         return stockInReceiptList.add(s);
@@ -27,7 +27,7 @@ public abstract class StockInReceiptManager {
 
     public static boolean deleteStockInReceipt(StockInReceipt s) {
         for (StockInItem item : s.getStockInItemList()) {
-            item.getMaterial().subMaterialInStock(item.getQuantity());
+            item.getMaterial().subMaterialInStock(item.getLongQuantity());
         }
         return stockInReceiptList.remove(s);
     }

@@ -3,6 +3,8 @@ package application.stockmanager;
 import application.material.MaterialType;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class StockInItem implements Serializable {
     private MaterialType material;
@@ -27,17 +29,27 @@ public class StockInItem implements Serializable {
         this.material = material;
     }
 
-    public long getQuantity() {
+    public long getLongQuantity() {
         return quantity;
     }
+    public String getQuantity() {
+        String number = null;
+        NumberFormat n = NumberFormat.getInstance(new Locale("vi", "VI"));
+        number = n.format(this.quantity);
+        return number;    }
 
     public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 
-    public long getTotalPayment() {
+    public long getLongTotalPayment() {
         return totalPayment;
     }
+    public String getTotalPayment() {
+        String number = null;
+        NumberFormat n = NumberFormat.getInstance(new Locale("vi", "VI"));
+        number = n.format(this.totalPayment);
+        return number;    }
 
     public void setTotalPayment(long totalPayment) {
         this.totalPayment = totalPayment;

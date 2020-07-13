@@ -41,7 +41,7 @@ public abstract class MenuManager {
 
     public static boolean readFile() {
         FileManager<MenuItem> fileManager = new FileManager<>();
-        MenuManager.getMenuList().addAll(fileManager.read(App.PATH_MENU));
+        menuList.addAll(fileManager.read(App.PATH_MENU));
         return true;
     }
 

@@ -6,9 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="443.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.order.OrderController">
+<AnchorPane prefHeight="476.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.order.OrderController">
    <children>
-      <TableView fx:id="orderTable" layoutY="36.0" prefHeight="400.0" prefWidth="579.0">
+      <TableView fx:id="orderTable" layoutY="63.0" prefHeight="400.0" prefWidth="579.0">
         <columns>
             <TableColumn fx:id="orderDateCol" prefWidth="130.0" text="Date" />
           <TableColumn fx:id="orderTableNumberCol" prefWidth="171.0" text="Table number" />
@@ -16,13 +16,13 @@
           <TableColumn fx:id="orderStatusCol" prefWidth="140.0" text="Status" />
         </columns>
       </TableView>
-      <Button layoutX="598.0" layoutY="36.0" mnemonicParsing="false" onAction="#createOrder" text="New order" />
-      <Button layoutX="599.0" layoutY="98.0" mnemonicParsing="false" onAction="#editOrder" prefHeight="25.0" prefWidth="72.0" text="Edit" />
-      <Button layoutX="599.0" layoutY="160.0" mnemonicParsing="false" onAction="#paymentOrder" prefHeight="25.0" prefWidth="72.0" text="Payment" />
-      <Button layoutX="599.0" layoutY="222.0" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="25.0" prefWidth="72.0" text="Delete" />
-      <Label fx:id="welcomeLabel" layoutY="1.0" onMouseClicked="#changePassword" prefHeight="34.0" prefWidth="438.0" />
-      <Label fx:id="timeLabel" layoutX="445.0" layoutY="1.0" prefHeight="34.0" prefWidth="134.0" />
-      <TextField fx:id="tableNumberText" layoutX="129.0" layoutY="5.0" prefHeight="27.0" prefWidth="174.0" />
-      <DatePicker fx:id="datePicker" layoutX="2.0" layoutY="5.0" prefHeight="27.0" prefWidth="128.0" />
+      <Button layoutX="599.0" layoutY="63.0" mnemonicParsing="false" onAction="#createOrder" text="New order" />
+      <Button layoutX="600.0" layoutY="135.0" mnemonicParsing="false" onAction="#editOrder" prefHeight="25.0" prefWidth="72.0" text="Edit" />
+      <Button layoutX="600.0" layoutY="201.0" mnemonicParsing="false" onAction="#paymentOrder" prefHeight="25.0" prefWidth="72.0" text="Payment" />
+      <Button layoutX="600.0" layoutY="263.0" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="25.0" prefWidth="72.0" text="Delete" />
+      <Label fx:id="welcomeLabel" layoutX="2.0" onMouseClicked="#changePassword" prefHeight="34.0" prefWidth="434.0" />
+      <Label fx:id="timeLabel" layoutX="445.0" prefHeight="34.0" prefWidth="134.0" />
+      <TextField fx:id="tableNumberText" layoutX="130.0" layoutY="36.0" prefHeight="27.0" prefWidth="174.0" />
+      <DatePicker fx:id="datePicker" layoutY="36.0" prefHeight="27.0" prefWidth="128.0" />
    </children>
 </AnchorPane>

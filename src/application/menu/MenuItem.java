@@ -6,8 +6,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MenuItem extends MenuManager implements Serializable {
     private String itemCode;
@@ -44,9 +46,14 @@ public class MenuItem extends MenuManager implements Serializable {
         this.itemName = itemName;
     }
 
-    public long getItemPrice() {
+    public long getLongItemPrice() {
         return itemPrice;
     }
+    public String getItemPrice() {
+        String number = null;
+        NumberFormat n = NumberFormat.getInstance(new Locale("vi", "VI"));
+        number = n.format(this.itemPrice);
+        return number;    }
 
     public String getItemUnit() {
         return itemUnit;

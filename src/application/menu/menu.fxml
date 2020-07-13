@@ -65,6 +65,7 @@
          <children>
             <TextField fx:id="tableNumberText" layoutX="594.0" layoutY="10.0" promptText="Table number" />
             <TextField fx:id="searchMenuText" layoutY="10.0" prefHeight="27.0" prefWidth="335.0" promptText="Type to search menu by name" />
+            <DatePicker fx:id="datePicker" layoutX="867.0" layoutY="10.0" />
          </children>
       </AnchorPane>
    </top>

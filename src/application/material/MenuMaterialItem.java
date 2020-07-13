@@ -1,6 +1,8 @@
 package application.material;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class MenuMaterialItem implements Serializable {
     private MaterialType itemType;
@@ -41,9 +43,14 @@ public class MenuMaterialItem implements Serializable {
         itemType = materialType;
     }
 
-    public Long getQuantity() {
+    public Long getLongQuantity() {
         return quantity;
     }
+    public String getQuantity() {
+        String number = null;
+        NumberFormat n = NumberFormat.getInstance(new Locale("vi", "VI"));
+        number = n.format(this.quantity);
+        return number;    }
 
     public void setQuantity(long quantity) {
         this.quantity = quantity;

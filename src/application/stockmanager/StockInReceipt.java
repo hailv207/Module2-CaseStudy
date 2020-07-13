@@ -5,9 +5,11 @@ import application.App;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static application.App.currentUser;
 
@@ -55,6 +57,10 @@ public class StockInReceipt implements Serializable {
         return stockInDate;
     }
 
+    public void setStockInDate(LocalDate stockInDate) {
+        this.stockInDate = stockInDate;
+    }
+
     public String getStockInReceiptCode() {
         return stockInReceiptCode;
     }
@@ -63,13 +69,18 @@ public class StockInReceipt implements Serializable {
         return stockInItemList;
     }
 
-    public long getTotalPayment() {
+    public long getLongTotalPayment() {
         return totalPayment;
     }
+    public String getTotalPayment() {
+        String number = null;
+        NumberFormat n = NumberFormat.getInstance(new Locale("vi", "VI"));
+        number = n.format(this.totalPayment);
+        return number;    }
     public void setTotalPayment() {
         long total = 0;
         for (StockInItem s: stockInItemList) {
-            total += s.getTotalPayment();
+            total += s.getLongTotalPayment();
             this.totalPayment = total;
         }
     }

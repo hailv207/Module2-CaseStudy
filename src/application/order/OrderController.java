@@ -1,14 +1,10 @@
 package application.order;
 
 import application.App;
-import application.employee.Employee;
-import application.employee.EmployeeEditController;
 import application.employee.EmployeeManager;
-import application.library.PasswordDialog;
 import application.material.MaterialManager;
 import application.material.MaterialType;
 import application.material.MenuMaterialItem;
-import application.menu.MenuItem;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -30,11 +26,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static application.App.currentUser;
-import static javafx.geometry.Pos.CENTER;
 
 public class OrderController implements Initializable {
 
@@ -79,13 +73,14 @@ public class OrderController implements Initializable {
         orderTotalCol.setCellValueFactory(new PropertyValueFactory<Order, String>("orderTotal"));
         orderDateCol.setCellValueFactory(new PropertyValueFactory<Order, LocalDate>("orderDate"));
         datePicker.setValue(LocalDate.now());
+        searchOrder();
         tableNumberText.textProperty().addListener((observable, oldValue, newValue) -> {
             searchOrder();
         });
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             searchOrder();
         });
-        searchOrder();
+
     }
 
     public void createOrder() {
@@ -177,7 +172,7 @@ public class OrderController implements Initializable {
                 return;
             }
             for (MenuMaterialItem m : list) {
-                Long value = m.getQuantity() * o.getOrderItemQuantity();
+                Long value = m.getLongQuantity() * o.getIntOrderItemQuantity();
                 String code = m.getMenuMaterialType().getMaterialCode();
                 MaterialType mi = MaterialManager.getMaterialByCode(code);
                 mi.subMaterialInStock(value);
@@ -190,10 +185,6 @@ public class OrderController implements Initializable {
         String tableNumber = tableNumberText.getText();
         LocalDate date = datePicker.getValue();
         orderTable.getItems().clear();
-        if (date == null) {
-            orderTable.getItems().addAll(OrderManager.searchOrder(tableNumber));
-        }
         orderTable.getItems().addAll(OrderManager.searchOrder(tableNumber, date));
-
     }
 }

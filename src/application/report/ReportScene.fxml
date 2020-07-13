@@ -13,7 +13,7 @@
          <children>
             <ComboBox fx:id="reportTypeCombo" layoutX="14.0" layoutY="22.0" prefHeight="27.0" prefWidth="177.0" />
             <Button fx:id="showButton" layoutX="471.0" layoutY="22.0" mnemonicParsing="false" onAction="#show" prefHeight="27.0" prefWidth="92.0" text="Show" />
-            <Button fx:id="showButton1" layoutX="625.0" layoutY="23.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="92.0" text="Export to .xls" />
+            <Button fx:id="showButton1" layoutX="625.0" layoutY="23.0" mnemonicParsing="false" onAction="#exportXLS" prefHeight="27.0" prefWidth="92.0" text="Export to .xls" />
             <ComboBox fx:id="reportTimeCombo" layoutX="230.0" layoutY="23.0" prefHeight="27.0" prefWidth="177.0" />
             <Button layoutX="983.0" layoutY="22.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="92.0" text="Cancel" />
          </children>

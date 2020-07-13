@@ -49,7 +49,7 @@ public class EditMenuController implements Initializable {
         materialItemTable.getItems().addAll(menuItem.getMaterialList());
         menuCodeText.setText(m.getItemCode());
         menuNameText.setText(m.getItemName());
-        menuPriceText.setText(String.valueOf(m.getItemPrice()));
+        menuPriceText.setText(String.valueOf(m.getLongItemPrice()));
         menuStatusCheck.setSelected(m.isStatus());
         menuUnitText.setText(m.getItemUnit());
     }

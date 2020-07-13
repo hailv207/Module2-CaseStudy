@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -42,6 +43,8 @@ public class NewStockInReceiptController implements Initializable {
     TextField stockInReceiptContentText;
     @FXML
     TextField searchMaterialText;
+    @FXML
+    DatePicker datePicker;
 
     StockInReceipt newStockInReceipt;
 
@@ -64,6 +67,8 @@ public class NewStockInReceiptController implements Initializable {
         stockInItemQuantityCol.setCellValueFactory(new PropertyValueFactory<StockInItem, Long>("quantity"));
         stockInItemTotalCol.setCellValueFactory(new PropertyValueFactory<StockInItem, Long>("totalPayment"));
         stockInItemTable.getItems().addAll(newStockInReceipt.getStockInItemList());
+        datePicker.setValue(LocalDate.now());
+        searchMaterial();
         searchMaterialText.textProperty().addListener((observable, oldValue, newValue) -> {
             searchMaterial();
         });
@@ -75,23 +80,23 @@ public class NewStockInReceiptController implements Initializable {
         alert.setContentText("Caution: You can not edit Stock in receipt once you had saved it. Please check details of Stock in receipt carefully!");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
+            newStockInReceipt.setStockInDate(datePicker.getValue());
             newStockInReceipt.setTotalPayment();
             newStockInReceipt.setStockInContent(stockInReceiptContentText.getText());
             StockInReceiptManager.addStockInReceipt(newStockInReceipt);
             StockInReceiptManager.writeFile();
-
+            cancel();
         }
     }
 
-    public void cancel(ActionEvent event) throws IOException {
-        Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+    public void cancel() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(App.getResource("stockmanager/StockInReceiptManagerScene.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
-        stage.setTitle("Edit stock in receipt");
-        stage.setScene(scene);
-        stage.centerOnScreen();
+        App.stage.setTitle("Edit stock in receipt");
+        App.stage.setScene(scene);
+        App.stage.centerOnScreen();
     }
 
     public void addStockInItem() {
@@ -158,7 +163,8 @@ public class NewStockInReceiptController implements Initializable {
             refreshStockInItemList();
         }
     }
-    public void searchMaterial(){
+
+    public void searchMaterial() {
         String searchKey = searchMaterialText.getText();
         materialTable.getItems().clear();
         materialTable.getItems().addAll(MaterialManager.searchMaterialByName(searchKey, true));

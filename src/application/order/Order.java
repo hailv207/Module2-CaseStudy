@@ -79,7 +79,7 @@ public class Order implements Serializable {
     public void calculateTotal() {
         long total = 0;
         for (OrderItem o : orderItemList) {
-            total += (o.getOrderItem().getItemPrice() * o.getOrderItemQuantity());
+            total += (o.getOrderItem().getLongItemPrice() * o.getIntOrderItemQuantity());
         }
         setOderTotal(total);
     }

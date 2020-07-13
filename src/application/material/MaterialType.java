@@ -1,6 +1,8 @@
 package application.material;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class MaterialType implements Serializable {
     private String materialCode;
@@ -66,8 +68,15 @@ public class MaterialType implements Serializable {
         this.materialUnit = materialUnit;
     }
 
-    public long getMaterialInStock() {
+    public long getLongMaterialInStock() {
         return materialInStock;
+    }
+
+    public String getMaterialInStock() {
+        String number = null;
+        NumberFormat n = NumberFormat.getInstance(new Locale("vi", "VI"));
+        number = n.format(this.materialInStock);
+        return number;
     }
 
     public void addMaterialInStock(long value) {
@@ -77,7 +86,6 @@ public class MaterialType implements Serializable {
     public void subMaterialInStock(long value) {
         materialInStock -= value;
     }
-
 
 
     @Override

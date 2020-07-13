@@ -3,6 +3,8 @@ package application.order;
 import application.menu.MenuItem;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 
 public class OrderItem implements Serializable {
@@ -28,9 +30,16 @@ public class OrderItem implements Serializable {
         this.orderItemName = orderItemName;
     }
 
-    public int getOrderItemQuantity() {
+    public int getIntOrderItemQuantity() {
         return orderItemQuantity;
     }
+    public String getOrderItemQuantity() {
+        String number = null;
+        NumberFormat n = NumberFormat.getInstance(new Locale("vi", "VI"));
+        number = n.format(this.orderItemQuantity);
+        return number;
+    }
+
 
     public void increaseQuantity() {
         orderItemQuantity += 1;

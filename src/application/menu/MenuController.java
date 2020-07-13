@@ -10,14 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -42,6 +40,9 @@ public class MenuController implements Initializable {
     @FXML
     TextField searchMenuText;
 
+    @FXML
+    DatePicker datePicker;
+
     Order newOrder = new Order();
 
     @Override
@@ -52,7 +53,9 @@ public class MenuController implements Initializable {
 
         orderItemName.setCellValueFactory(new PropertyValueFactory<OrderItem, String>("orderItemName"));
         orderQuantityCol.setCellValueFactory(new PropertyValueFactory<OrderItem, Integer>("orderItemQuantity"));
+        datePicker.setValue(LocalDate.now());
         loadMenuItems();
+        searchMenuByName();
         searchMenuText.textProperty().addListener(((observable, oldValue, newValue) -> {
             searchMenuByName();
         }));
@@ -142,6 +145,7 @@ public class MenuController implements Initializable {
                 }
             }
         }
+        newOrder.setOrderDate(datePicker.getValue());
         newOrder.setTableNumber(tableNumber);
         newOrder.calculateTotal();
         OrderManager.add(newOrder);

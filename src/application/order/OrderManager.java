@@ -32,16 +32,6 @@ public abstract class OrderManager {
         OrderManager.getOrderList().addAll(fileManager.read(App.PATH_ORDER));
     }
 
-    public static List<Order> searchOrder(String tableNumber) {
-        List<Order> list = new ArrayList<>();
-        for (Order o : orderList) {
-            if (o.getTableNumber().toLowerCase().contains(tableNumber.toLowerCase())) {
-                list.add(o);
-            }
-        }
-        return list;
-    }
-
     public static List<Order> searchOrder(String tableNumber, LocalDate date) {
         List<Order> list = new ArrayList<>();
         for (Order o : orderList) {

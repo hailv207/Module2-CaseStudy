@@ -65,6 +65,7 @@ public class AddNewMenuController implements Initializable {
         materialItemQuantityCol.setCellValueFactory(new PropertyValueFactory<MenuMaterialItem, Long>("quantity"));
         materialItemTable.getItems().clear();
         menuStatusCheck.setSelected(true);
+        searchMaterialByName();
         searchMaterialText.textProperty().addListener((observable, oldValue, newValue) -> {
             searchMaterialByName();
         });
@@ -165,10 +166,11 @@ public class AddNewMenuController implements Initializable {
             }
         }
     }
-    public void searchMaterialByName(){
+
+    public void searchMaterialByName() {
         String searchKey = searchMaterialText.getText();
         materialTable.getItems().clear();
-        materialTable.getItems().addAll(MaterialManager.searchMaterialByName(searchKey,true));
+        materialTable.getItems().addAll(MaterialManager.searchMaterialByName(searchKey, true));
     }
 
 }
